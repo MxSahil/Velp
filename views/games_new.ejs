@@ -1,0 +1,126 @@
+<%- include("partials/header") %>
+<div class="container">
+  <h1 class="pageTitle">Add a New Game</h1>
+  <form action="/games" method="POST">
+    <div class="mt-3 form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" name="title" placeholder="e.g. Fortnite" autofocus>
+    </div>
+
+    <div class="mt-3 form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" rows="3" name="description" placeholder="Description"></textarea>
+    </div>
+
+    <div class="mt-3 form-group">
+      <label for="image">Game Cover Link</label>
+      <input type="text" class="form-control" name="image" placeholder="https://www.game-cover.com" autofocus>
+    </div>
+
+    <div class="mt-3 form-group row">
+      <div class="col">
+        <label for="platforms">Platforms</label>
+        <select class="custom-select" multiple name="platforms" size="5">
+          <option >PC</option>
+          <option >Playstation 5</option>
+          <option >Xbox Series X</option>
+          <option >Playstation 4</option>
+          <option >Xbox One</option>
+          <option >Playstation 3</option>
+          <option >Xbox 360</option>
+        </select>
+      </div>
+
+      <div class="col">
+        <label for="genres">Genres</label>
+        <select class="custom-select" multiple name="genres" size="5">
+          <option >Action</option>
+          <option >Adventure</option>
+          <option >Indie</option>
+          <option >RPG</option>
+          <option >Strategy</option>
+          <option >Shooter</option>
+          <option >Casual</option>
+          <option > Simulation</option>
+          <option >Puzzle</option>
+          <option >Arcade</option>
+          <option >Platformer</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mt-3 form-group row">
+      <div class="col">
+        <label for="developers">Developers</label>
+        <select class="custom-select" multiple name="developers" size="5">
+          <option >Treyarch</option>
+          <option >343 Industries</option>
+          <option >Bungie</option>
+          <option >2K Sports</option>
+          <option >Epic Games</option>
+          <option >Electronic Arts</option>
+          <option >Infinity Ward</option>
+        </select>
+      </div>
+
+      <div class="col">
+        <label for="publishers">Publishers</label>
+        <select class="custom-select" multiple name="publishers" size="5">
+          <option >Activision Blizzard</option>
+          <option >Microsoft</option>
+          <option >Sony</option>
+          <option >EA</option>
+          <option >Google</option>
+          <option >Nintendo</option>
+          <option >Sega</option>
+          <option >Tell-Tale Games</option>
+          <option >Valve Corporation</option>
+          <option >Ubisoft</option>
+          <option >Bethesda Softworks</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mt-3 form-group row">
+      <div class="col">
+        <label for="esrb">ESRB Rating</label>
+        <select class="custom-select" name="esrb">
+          <option selected >Rating Pending</option>
+          <option >Everyone</option>
+          <option >Everyone 10+</option>
+          <option >Teen</option>
+          <option >Mature 17+</option>
+          <option >Adults Only 18+</option>
+
+        </select>
+      </div>
+
+      <div class="col">
+        <label for="metacritic">Metacritic Score</label>
+        <input class="form-control" type="number" value="42" min="0" max="100" name="metacritic"">
+      </div>
+
+      <div class="col">
+        <label for="releaseDate">Release Date</label>
+        <input type="date" class="form-control" name="releaseDate" placeholder="2021/01/13" autofocus>
+      </div>
+    </div>
+    <button type="submit" class="mt-3 btn btn-success">Submit</button>
+  </form>
+</div>
+
+  <!-- <h1>Add New Game</h1>
+  <form action="/games" method="POST">
+    <label for="title">Title</label>
+    <input type="text" name="title" autofocus>
+
+    <label for="description">Description</label>
+    <input type="text" name="description">
+
+    <label for="image">Game Cover Link</label>
+    <input type="text" name="image">
+
+    <button type="submit">Submit</button>
+  </form> -->
+
+<%- include("partials/footer") %>

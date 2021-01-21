@@ -1,0 +1,98 @@
+<%- include("partials/header") %>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-6 mb-3 img-container">
+      <img class="rounded mx-auto d-block" alt="<%=game.title%> image" src="<%=game.image%>">
+    </div>
+
+    <div class="col-md-6 mb-3 details-container">
+      <h1><%=game.title%></h1>
+      <p><%=game.description%></p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" class="border-bottom-0"></th>
+            <th scope="col" class="border-bottom-0"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Platforms</th>
+            <% var feature = ""; %>
+            <% for(i = 0; i < game.platforms.length; i++) { %>
+            <%    feature = feature + game.platforms[i] + ", " %>
+            <% } %>
+            <td><%= feature.substring(0, feature.length - 2) %></td>
+          </tr>
+
+          <tr>
+            <th scope="row">Genres</th>
+            <% feature = ""; %>
+            <% for(i = 0; i < game.genres.length; i++) { %>
+            <%    feature = feature + game.genres[i] + ", " %>
+            <% } %>
+            <td><%= feature.substring(0, feature.length - 2) %></td>
+          </tr>
+
+          <tr>
+            <th scope="row">ESRB Rating</th>
+            <td><%= game.esrb %></td>
+          </tr>
+
+          <tr>
+            <th scope="row">Metacritic Score</th>
+            <td><%= game.metacritic %></td>
+          </tr>
+
+          <tr>
+            <th scope="row">Release Date</th>
+            <td><%= game.releaseDate %></td>
+          </tr>
+
+          <tr>
+            <th scope="row">Developers</th>
+            <% feature = ""; %>
+            <% for(i = 0; i < game.developer.length; i++) { %>
+            <%    feature = feature + game.developer[i] + ", " %>
+            <% } %>
+            <td><%= feature.substring(0, feature.length - 2) %></td>
+          </tr>
+
+          <tr>
+            <th scope="row">Publishers</th>
+            <% feature = ""; %>
+            <% for(i = 0; i < game.publisher.length; i++) { %>
+            <%    feature = feature + game.publisher[i] + ", " %>
+            <% } %>
+            <td><%= feature.substring(0, feature.length - 2) %></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="col-4">
+          <img class="mx-auto d-block game-experience-icons" alt="Want"  src="https://icons.iconarchive.com/icons/danieledesantis/christmas/512/gift-icon.png">
+          <h4 class="game-experience-text">Want</h4>
+        </div>
+
+        <div class="col-4">
+          <img class="mx-auto d-block game-experience-icons" alt="Playing"  src="https://static.thenounproject.com/png/2879647-200.png">
+          <h4 class="game-experience-text">Playing</h4>
+        </div>
+
+        <div class="col-4">
+          <img class="mx-auto d-block game-experience-icons" alt="Completed"  src="https://static.thenounproject.com/png/463939-200.png">
+          <h4 class="game-experience-text">Completed</h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div>
+    Comments section
+  </div>
+</div>
+
+<%- include("partials/footer") %>

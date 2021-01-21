@@ -1,0 +1,58 @@
+.pageTitle{
+  margin: 1.5rem 0 1rem 0;
+}
+
+/* .gameCardCont{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border-top: 1px solid black;
+  padding-top: 1.5rem;
+} */
+
+.card{
+  height: 100%;
+}
+
+.card-img-top{
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.card-title{
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.card-text{
+  font-family: 'Ubuntu', sans-serif;
+  line-height: 1.4;
+}
+
+.custom-select{
+  width: 100%;
+  border-color: rgb(206, 212, 218);
+  padding: 6px 12px;
+}
+
+
+.game-experience-icons{
+  width: 100px;
+}
+
+.game-experience-text{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.img-container img{
+  width: 75%;
+
+}
