@@ -51,9 +51,13 @@ app.use(morgan('tiny'));
 // MongoDB connection
 try {
   mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
-} catch(err){
+} catch(e){
   console.log("Could not connect using config");
-  mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+  mongoose
+     .connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+     .then(() => console.log( 'Database Connected' ))
+     .catch(err => console.log( err ));
+  // mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 }
 mongoose.Promise = global.Promise;
 
