@@ -65,8 +65,8 @@ app.use(expressSession({
 }));
 
 //PASSPORT Config
-app.use(passport.initialize())
-app.use(passport.session()) //Allows persistent sessions
+app.use(passport.initialize());
+app.use(passport.session()); //Allows persistent sessions
 passport.serializeUser(User.serializeUser()); //Encodes data into the session (passport-local-mongoose)
 passport.deserializeUser(User.deserializeUser()); //decodes data from the session (passport-local-mongoose)
 passport.use(new LocalStrategy(User.authenticate()));
