@@ -14,7 +14,7 @@ router.get("/games", async (req, res) => {
     res.render("games", {games: games});
   } catch(err) {
     console.log(err);
-    res.send("Error");
+    res.send("Error - SHOW Games");
   }
 });
 
