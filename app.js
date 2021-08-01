@@ -13,7 +13,15 @@ const LocalStrategy = require('passport-local').Strategy;
 const expressSession = require('express-session');
 
 //Config Imports
-const config = require("./config");
+let config
+try {
+  config = require("./config");
+
+} catch(err){
+  console.log("Could not import config file.");
+  console.log(err)
+
+}
 
 //Route Imports
 const gameRoutes = require('./routes/games');
@@ -41,12 +49,17 @@ app.use(morgan('tiny'));
 // DEVELOPEMENT
 // ===========================
 // MongoDB connection
-mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+try {
+  mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+} catch(err){
+  console.log("Could not connect using config");
+  mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+}
 mongoose.Promise = global.Promise;
 
 //Express Session Config
 app.use(expressSession({
-  secret: "fsdhfalkjfknadjsndksahdkajlasjhsagdskadjdsnadndjagjdsdgkdgdfeueeieiieoamnsandm",
+  secret: process.env.ES_SECRET || config.expressSession.secret,
   resave: false,
   saveUninitialized: false
 }));
@@ -83,6 +96,6 @@ app.use(authRoutes);
 // ===========================
 // LISTEN
 // ===========================
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("yelp_clone is running...");
 });
