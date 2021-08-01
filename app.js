@@ -20,7 +20,6 @@ try {
 } catch(err){
   console.log("Could not import config file.");
   console.log(err);
-
 }
 
 //Route Imports
