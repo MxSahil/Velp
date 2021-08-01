@@ -16,7 +16,6 @@ const expressSession = require('express-session');
 let config;
 try {
   config = require("./config");
-
 } catch(err){
   console.log("Could not import config file.");
   console.log(err);
