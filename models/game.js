@@ -7,10 +7,19 @@ const gameSchema = new mongoose.Schema({
   releaseDate: Date,
   developer: Array,
   publisher: Array,
-  // sameSeries: Array, IDEA: determine this list on the backend
   platforms: Array,
   metacritic: Number,
-  esrb: String
+  esrb: String,
+  owner: {
+          id: {
+                type: mongoose.Schema.Types.ObjectID,
+                ref: "User"
+              },
+          username: String}
+});
+
+gameSchema.index({
+  '$**': 'text'
 });
 const Game = mongoose.model("game", gameSchema);
 module.exports = Game;
