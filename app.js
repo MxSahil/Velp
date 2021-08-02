@@ -47,22 +47,23 @@ app.use(morgan('tiny'));
 // DEVELOPEMENT
 // ===========================
 // MongoDB connection
-// try {
-//   mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
-//   .then(() => console.log( 'Database Connected' ))
-//   .catch(err => console.log( err ));
-// } catch(e){
-//   console.log("Could not connect using config");
-//   mongoose
-//      .connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
-//      .then(() => console.log( 'Database Connected' ))
-//      .catch(err => console.log( err ));
-//   mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
-// }
-mongoose.connect(process.env.DB_CONNECTION_STRING || config.db.connection, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
-        .then(connect => console.log('connected to mongodb..'))
-        .catch(e => console.log('could not connect to mongodb', e));
-mongoose.Promise = global.Promise;
+console.log("Connecting to MongoDB")
+try {
+  mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+  .then(() => console.log( 'Database Connected' ))
+  .catch(err => console.log( err ));
+} catch(e){
+  console.log("Could not connect using config");
+  mongoose
+     .connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+     .then(() => console.log( 'Database Connected' ))
+     .catch(error => console.log( error ));
+  // mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+}
+// mongoose.connect(process.env.DB_CONNECTION_STRING || config.db.connection, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
+//         .then(connect => console.log('connected to mongodb..'))
+//         .catch(e => console.log('could not connect to mongodb', e));
+// mongoose.Promise = global.Promise;
 
 //Express Session Config
 app.use(expressSession({
