@@ -60,7 +60,7 @@ mongoose.Promise = global.Promise;
 
 //Express Session Config
 app.use(expressSession({
-  secret: process.env.ES_SECRET || config.expressSession.secret,
+  secret: process.env.EXPRESS_SESSION_SECRET || config.expressSession.secret,
   resave: false,
   saveUninitialized: false
 }));
