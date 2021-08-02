@@ -13,9 +13,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const expressSession = require('express-session');
 
 //Config Imports
-let config;
 try {
-  config = require("./config");
+  var config = require("./config");
 } catch(err){
   console.log("Could not import config file.");
   console.log(err);
