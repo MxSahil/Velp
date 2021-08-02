@@ -57,7 +57,9 @@ try {
   mongoose
      .connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
      .then(() => console.log( 'Database Connected' ))
-     .catch(error => console.log( error ));
+     .catch(error => {
+                      console.log("Error");
+                      console.log(error);});
   // mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 }
 // mongoose.connect(process.env.DB_CONNECTION_STRING || config.db.connection, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})

@@ -1,73 +1,4 @@
 »   Warning: heroku update available from 7.53.0 to 7.56.1.
-2021-08-02T02:16:46.937146+00:00 app[web.1]: MongooseError: Operation `games.find()` buffering timed out after 10000ms
-2021-08-02T02:16:46.937185+00:00 app[web.1]: at Timeout.<anonymous> (/app/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:184:20)
-2021-08-02T02:16:46.937186+00:00 app[web.1]: at listOnTimeout (internal/timers.js:554:17)
-2021-08-02T02:16:46.937186+00:00 app[web.1]: at processTimers (internal/timers.js:497:7)
-2021-08-02T02:16:46.938754+00:00 app[web.1]: GET /games 304 - - 10038.641 ms
-2021-08-02T02:16:46.940377+00:00 heroku[router]: at=info method=GET path="/games" host=yelp-clone-games.herokuapp.com request_id=7de45c0e-6019-4e87-9cc1-f3db413d098e fwd="99.251.248.223" dyno=web.1 connect=1ms service=10042ms status=304 bytes=150 protocol=https
-2021-08-02T02:16:49.546832+00:00 app[web.1]: GET /signup 304 - - 9.622 ms
-2021-08-02T02:16:49.549268+00:00 heroku[router]: at=info method=GET path="/signup" host=yelp-clone-games.herokuapp.com request_id=bffb41bb-fd07-4fbd-8843-d8c1f5e10235 fwd="99.251.248.223" dyno=web.1 connect=1ms service=18ms status=304 bytes=151 protocol=https
-2021-08-02T02:16:49.685111+00:00 app[web.1]: GET /css/styles.css 304 - - 1.726 ms
-2021-08-02T02:16:49.693518+00:00 heroku[router]: at=info method=GET path="/css/styles.css" host=yelp-clone-games.herokuapp.com request_id=9151dba8-68d8-4c43-aeac-e5879cee8e5e fwd="99.251.248.223" dyno=web.1 connect=1ms service=4ms status=304 bytes=237 protocol=https
-2021-08-02T02:16:49.706734+00:00 app[web.1]: GET /images/Video-Game-Controller-Icon-IDV-edit-green.svg.svg 304 - - 7.603 ms
-2021-08-02T02:16:49.708535+00:00 heroku[router]: at=info method=GET path="/images/Video-Game-Controller-Icon-IDV-edit-green.svg.svg" host=yelp-clone-games.herokuapp.com request_id=f4da01b2-670c-4b56-9218-aaa0f360d2a0 fwd="99.251.248.223" dyno=web.1 connect=1ms service=14ms status=304 bytes=237 protocol=https
-2021-08-02T02:17:06.404740+00:00 app[web.1]: MongooseError: Operation `users.findOne()` buffering timed out after 10000ms
-2021-08-02T02:17:06.404750+00:00 app[web.1]: at Timeout.<anonymous> (/app/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:184:20)
-2021-08-02T02:17:06.404751+00:00 app[web.1]: at listOnTimeout (internal/timers.js:554:17)
-2021-08-02T02:17:06.404752+00:00 app[web.1]: at processTimers (internal/timers.js:497:7)
-2021-08-02T02:17:06.406590+00:00 app[web.1]: Mon, 02 Aug 2021 02:17:06 GMT express deprecated res.send(status, body): Use res.status(status).send(body) instead at routes/auth.js:28:9
-2021-08-02T02:17:06.413405+00:00 app[web.1]: (node:21) UnhandledPromiseRejectionWarning: RangeError [ERR_HTTP_INVALID_STATUS_CODE]: Invalid status code: Error in signing up
-2021-08-02T02:17:06.413407+00:00 app[web.1]: at ServerResponse.writeHead (_http_server.js:255:11)
-2021-08-02T02:17:06.413407+00:00 app[web.1]: at ServerResponse.writeHead (/app/node_modules/on-headers/index.js:44:26)
-2021-08-02T02:17:06.413408+00:00 app[web.1]: at ServerResponse.writeHead (/app/node_modules/on-headers/index.js:44:26)
-2021-08-02T02:17:06.413408+00:00 app[web.1]: at ServerResponse._implicitHeader (_http_server.js:246:8)
-2021-08-02T02:17:06.413409+00:00 app[web.1]: at write_ (_http_outgoing.js:685:9)
-2021-08-02T02:17:06.413409+00:00 app[web.1]: at ServerResponse.end (_http_outgoing.js:798:5)
-2021-08-02T02:17:06.413410+00:00 app[web.1]: at ServerResponse.end (/app/node_modules/express-session/index.js:359:19)
-2021-08-02T02:17:06.413410+00:00 app[web.1]: at ServerResponse.send (/app/node_modules/express/lib/response.js:221:10)
-2021-08-02T02:17:06.413411+00:00 app[web.1]: at ServerResponse.json (/app/node_modules/express/lib/response.js:267:15)
-2021-08-02T02:17:06.413411+00:00 app[web.1]: at ServerResponse.send (/app/node_modules/express/lib/response.js:158:21)
-2021-08-02T02:17:06.413412+00:00 app[web.1]: at /app/routes/auth.js:28:9
-2021-08-02T02:17:06.413412+00:00 app[web.1]: (Use `node --trace-warnings ...` to show where the warning was created)
-2021-08-02T02:17:06.413562+00:00 app[web.1]: (node:21) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 3)
-2021-08-02T02:17:06.413671+00:00 app[web.1]: (node:21) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
-2021-08-02T02:17:26.351839+00:00 heroku[router]: at=error code=H12 desc="Request timeout" method=POST path="/signup" host=yelp-clone-games.herokuapp.com request_id=706c208c-80cc-48b3-839a-faf72a504569 fwd="99.251.248.223" dyno=web.1 connect=1ms service=30001ms status=503 bytes=0 protocol=https
-2021-08-02T02:17:26.352705+00:00 app[web.1]: POST /signup - - - 10056.482 ms
-2021-08-02T02:33:07.000000+00:00 app[api]: Build started by user sahil.malek@mail.utoronto.ca
-2021-08-02T02:33:30.199974+00:00 app[api]: Deploy 38dce3e7 by user sahil.malek@mail.utoronto.ca
-2021-08-02T02:33:30.199974+00:00 app[api]: Release v21 created by user sahil.malek@mail.utoronto.ca
-2021-08-02T02:33:30.539694+00:00 heroku[web.1]: Restarting
-2021-08-02T02:33:30.567662+00:00 heroku[web.1]: State changed from up to starting
-2021-08-02T02:33:31.000000+00:00 app[api]: Build succeeded
-2021-08-02T02:33:32.185404+00:00 heroku[web.1]: Stopping all processes with SIGTERM
-2021-08-02T02:33:32.429964+00:00 heroku[web.1]: Process exited with status 143
-2021-08-02T02:33:34.092568+00:00 heroku[web.1]: Starting process with command `npm start`
-2021-08-02T02:33:38.687950+00:00 app[web.1]:
-2021-08-02T02:33:38.687987+00:00 app[web.1]: > yelp_games@1.0.0 start /app
-2021-08-02T02:33:38.687987+00:00 app[web.1]: > node app.js
-2021-08-02T02:33:38.687988+00:00 app[web.1]:
-2021-08-02T02:33:39.630396+00:00 app[web.1]: Could not import config file.
-2021-08-02T02:33:39.636257+00:00 app[web.1]: Error: Cannot find module './config'
-2021-08-02T02:33:39.636259+00:00 app[web.1]: Require stack:
-2021-08-02T02:33:39.636259+00:00 app[web.1]: - /app/app.js
-2021-08-02T02:33:39.636260+00:00 app[web.1]: at Function.Module._resolveFilename (internal/modules/cjs/loader.js:889:15)
-2021-08-02T02:33:39.636261+00:00 app[web.1]: at Function.Module._load (internal/modules/cjs/loader.js:745:27)
-2021-08-02T02:33:39.636261+00:00 app[web.1]: at Module.require (internal/modules/cjs/loader.js:961:19)
-2021-08-02T02:33:39.636262+00:00 app[web.1]: at require (internal/modules/cjs/helpers.js:92:18)
-2021-08-02T02:33:39.636262+00:00 app[web.1]: at Object.<anonymous> (/app/app.js:17:16)
-2021-08-02T02:33:39.636262+00:00 app[web.1]: at Module._compile (internal/modules/cjs/loader.js:1072:14)
-2021-08-02T02:33:39.636263+00:00 app[web.1]: at Object.Module._extensions..js (internal/modules/cjs/loader.js:1101:10)
-2021-08-02T02:33:39.636263+00:00 app[web.1]: at Module.load (internal/modules/cjs/loader.js:937:32)
-2021-08-02T02:33:39.636263+00:00 app[web.1]: at Function.Module._load (internal/modules/cjs/loader.js:778:12)
-2021-08-02T02:33:39.636264+00:00 app[web.1]: at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:76:12)
-2021-08-02T02:33:39.636265+00:00 app[web.1]: at internal/main/run_main_module.js:17:47 {
-2021-08-02T02:33:39.636265+00:00 app[web.1]: code: 'MODULE_NOT_FOUND',
-2021-08-02T02:33:39.636265+00:00 app[web.1]: requireStack: [ '/app/app.js' ]
-2021-08-02T02:33:39.636266+00:00 app[web.1]: }
-2021-08-02T02:33:39.736296+00:00 app[web.1]: Warning: connect.session() MemoryStore is not
-2021-08-02T02:33:39.736302+00:00 app[web.1]: designed for a production environment, as it will leak
-2021-08-02T02:33:39.736302+00:00 app[web.1]: memory, and will not scale past a single process.
-2021-08-02T02:33:39.749209+00:00 app[web.1]: yelp_clone is running...
 2021-08-02T02:33:39.750386+00:00 app[web.1]: could not connect to mongodb TypeError: Cannot read property 'split' of null
 2021-08-02T02:33:39.750388+00:00 app[web.1]: at parseSrvConnectionString (/app/node_modules/mongodb/lib/core/uri_parser.js:44:23)
 2021-08-02T02:33:39.750388+00:00 app[web.1]: at parseConnectionString (/app/node_modules/mongodb/lib/core/uri_parser.js:587:12)
@@ -99,3 +30,72 @@
 2021-08-02T02:33:58.622190+00:00 app[web.1]: at processTimers (internal/timers.js:500:7)
 2021-08-02T02:33:58.629395+00:00 app[web.1]: GET /games 304 - - 10029.026 ms
 2021-08-02T02:33:58.631668+00:00 heroku[router]: at=info method=GET path="/games" host=yelp-clone-games.herokuapp.com request_id=fad398dd-0111-42f3-b305-bbd179ce1bb7 fwd="99.251.248.223" dyno=web.1 connect=1ms service=10032ms status=304 bytes=150 protocol=https
+2021-08-02T02:52:56.000000+00:00 app[api]: Build started by user sahil.malek@mail.utoronto.ca
+2021-08-02T02:53:18.269626+00:00 app[api]: Release v22 created by user sahil.malek@mail.utoronto.ca
+2021-08-02T02:53:18.269626+00:00 app[api]: Deploy 8957809f by user sahil.malek@mail.utoronto.ca
+2021-08-02T02:53:19.000000+00:00 app[api]: Build succeeded
+2021-08-02T02:53:19.302888+00:00 heroku[web.1]: Restarting
+2021-08-02T02:53:19.313914+00:00 heroku[web.1]: State changed from up to starting
+2021-08-02T02:53:20.636724+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2021-08-02T02:53:20.713842+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2021-08-02T02:53:20.836020+00:00 heroku[web.1]: Process exited with status 143
+2021-08-02T02:53:22.468726+00:00 heroku[web.1]: Starting process with command `npm start`
+2021-08-02T02:53:25.681257+00:00 app[web.1]:
+2021-08-02T02:53:25.681282+00:00 app[web.1]: > yelp_games@1.0.0 start /app
+2021-08-02T02:53:25.681283+00:00 app[web.1]: > node app.js
+2021-08-02T02:53:25.681283+00:00 app[web.1]:
+2021-08-02T02:53:26.427043+00:00 app[web.1]: Could not import config file.
+2021-08-02T02:53:26.431383+00:00 app[web.1]: Error: Cannot find module './config'
+2021-08-02T02:53:26.431386+00:00 app[web.1]: Require stack:
+2021-08-02T02:53:26.431386+00:00 app[web.1]: - /app/app.js
+2021-08-02T02:53:26.431388+00:00 app[web.1]: at Function.Module._resolveFilename (internal/modules/cjs/loader.js:889:15)
+2021-08-02T02:53:26.431388+00:00 app[web.1]: at Function.Module._load (internal/modules/cjs/loader.js:745:27)
+2021-08-02T02:53:26.431389+00:00 app[web.1]: at Module.require (internal/modules/cjs/loader.js:961:19)
+2021-08-02T02:53:26.431389+00:00 app[web.1]: at require (internal/modules/cjs/helpers.js:92:18)
+2021-08-02T02:53:26.431390+00:00 app[web.1]: at Object.<anonymous> (/app/app.js:17:16)
+2021-08-02T02:53:26.431390+00:00 app[web.1]: at Module._compile (internal/modules/cjs/loader.js:1072:14)
+2021-08-02T02:53:26.431391+00:00 app[web.1]: at Object.Module._extensions..js (internal/modules/cjs/loader.js:1101:10)
+2021-08-02T02:53:26.431391+00:00 app[web.1]: at Module.load (internal/modules/cjs/loader.js:937:32)
+2021-08-02T02:53:26.431391+00:00 app[web.1]: at Function.Module._load (internal/modules/cjs/loader.js:778:12)
+2021-08-02T02:53:26.431392+00:00 app[web.1]: at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:76:12)
+2021-08-02T02:53:26.431392+00:00 app[web.1]: at internal/main/run_main_module.js:17:47 {
+2021-08-02T02:53:26.431393+00:00 app[web.1]: code: 'MODULE_NOT_FOUND',
+2021-08-02T02:53:26.431393+00:00 app[web.1]: requireStack: [ '/app/app.js' ]
+2021-08-02T02:53:26.431394+00:00 app[web.1]: }
+2021-08-02T02:53:26.483612+00:00 app[web.1]: Connecting to MongoDB
+2021-08-02T02:53:26.483929+00:00 app[web.1]: Could not connect using config
+2021-08-02T02:53:26.492751+00:00 app[web.1]: Warning: connect.session() MemoryStore is not
+2021-08-02T02:53:26.492752+00:00 app[web.1]: designed for a production environment, as it will leak
+2021-08-02T02:53:26.492753+00:00 app[web.1]: memory, and will not scale past a single process.
+2021-08-02T02:53:26.501678+00:00 app[web.1]: yelp_clone is running...
+2021-08-02T02:53:26.503769+00:00 app[web.1]: TypeError: Cannot read property 'split' of null
+2021-08-02T02:53:26.503770+00:00 app[web.1]: at parseSrvConnectionString (/app/node_modules/mongodb/lib/core/uri_parser.js:44:23)
+2021-08-02T02:53:26.503770+00:00 app[web.1]: at parseConnectionString (/app/node_modules/mongodb/lib/core/uri_parser.js:587:12)
+2021-08-02T02:53:26.503771+00:00 app[web.1]: at connect (/app/node_modules/mongodb/lib/operations/connect.js:282:3)
+2021-08-02T02:53:26.503772+00:00 app[web.1]: at /app/node_modules/mongodb/lib/mongo_client.js:224:5
+2021-08-02T02:53:26.503772+00:00 app[web.1]: at maybePromise (/app/node_modules/mongodb/lib/utils.js:665:3)
+2021-08-02T02:53:26.503773+00:00 app[web.1]: at MongoClient.connect (/app/node_modules/mongodb/lib/mongo_client.js:220:10)
+2021-08-02T02:53:26.503773+00:00 app[web.1]: at /app/node_modules/mongoose/lib/connection.js:820:12
+2021-08-02T02:53:26.503773+00:00 app[web.1]: at new Promise (<anonymous>)
+2021-08-02T02:53:26.503779+00:00 app[web.1]: at NativeConnection.Connection.openUri (/app/node_modules/mongoose/lib/connection.js:817:19)
+2021-08-02T02:53:26.503779+00:00 app[web.1]: at /app/node_modules/mongoose/lib/index.js:345:10
+2021-08-02T02:53:26.503780+00:00 app[web.1]: at /app/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:5
+2021-08-02T02:53:26.503780+00:00 app[web.1]: at new Promise (<anonymous>)
+2021-08-02T02:53:26.503781+00:00 app[web.1]: at promiseOrCallback (/app/node_modules/mongoose/lib/helpers/promiseOrCallback.js:30:10)
+2021-08-02T02:53:26.503781+00:00 app[web.1]: at Mongoose._promiseOrCallback (/app/node_modules/mongoose/lib/index.js:1135:10)
+2021-08-02T02:53:26.503782+00:00 app[web.1]: at Mongoose.connect (/app/node_modules/mongoose/lib/index.js:344:20)
+2021-08-02T02:53:26.503782+00:00 app[web.1]: at Object.<anonymous> (/app/app.js:58:7)
+2021-08-02T02:53:26.889418+00:00 heroku[web.1]: State changed from starting to up
+2021-08-02T02:53:54.370235+00:00 heroku[router]: at=info method=GET path="/" host=yelp-clone-games.herokuapp.com request_id=b7f73a9c-c1b6-4536-8771-7dc305b7126a fwd="99.251.248.223" dyno=web.1 connect=1ms service=67ms status=304 bytes=151 protocol=https
+2021-08-02T02:53:54.375083+00:00 app[web.1]: GET / 304 - - 38.053 ms
+2021-08-02T02:53:54.506957+00:00 heroku[router]: at=info method=GET path="/images/Video-Game-Controller-Icon-IDV-edit-green.svg.svg" host=yelp-clone-games.herokuapp.com request_id=75731cef-9444-4216-89d3-9695c76e530d fwd="99.251.248.223" dyno=web.1 connect=1ms service=43ms status=200 bytes=2570 protocol=https
+2021-08-02T02:53:54.515780+00:00 app[web.1]: GET /images/Video-Game-Controller-Icon-IDV-edit-green.svg.svg 200 2292 - 34.090 ms
+2021-08-02T02:53:54.516941+00:00 heroku[router]: at=info method=GET path="/css/styles.css" host=yelp-clone-games.herokuapp.com request_id=64703562-bb4d-430e-a918-8dc72d9299c8 fwd="99.251.248.223" dyno=web.1 connect=1ms service=52ms status=200 bytes=1157 protocol=https
+2021-08-02T02:53:54.523190+00:00 app[web.1]: GET /css/styles.css 200 870 - 44.665 ms
+2021-08-02T02:53:55.957608+00:00 app[web.1]: undefined
+2021-08-02T02:54:06.012102+00:00 app[web.1]: MongooseError: Operation `games.find()` buffering timed out after 10000ms
+2021-08-02T02:54:06.012113+00:00 app[web.1]: at Timeout.<anonymous> (/app/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:184:20)
+2021-08-02T02:54:06.012114+00:00 app[web.1]: at listOnTimeout (internal/timers.js:557:17)
+2021-08-02T02:54:06.012116+00:00 app[web.1]: at processTimers (internal/timers.js:500:7)
+2021-08-02T02:54:06.014194+00:00 heroku[router]: at=info method=GET path="/games" host=yelp-clone-games.herokuapp.com request_id=3b853a7d-6d85-4a55-8f0c-2308e63d04bb fwd="99.251.248.223" dyno=web.1 connect=1ms service=10064ms status=304 bytes=150 protocol=https
+2021-08-02T02:54:06.015700+00:00 app[web.1]: GET /games 304 - - 10058.254 ms
