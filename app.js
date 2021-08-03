@@ -87,9 +87,11 @@ app.use(express.static("public"));
 // Body Parser Config
 app.use(bodyParser.urlencoded({extended: true}));
 
-//Current User Middleware config
+//Current User and Message Middleware config
 app.use((req, res, next) => {
   res.locals.user = req.user;
+  res.locals.errorMessage = req.flash("error");
+  res.locals.successMessage = req.flash("success");
   next();
 });
 

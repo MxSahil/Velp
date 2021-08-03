@@ -20,12 +20,14 @@ router.post("/signup", async (req, res) => {
     console.log(newUser);
 
     passport.authenticate('local')(req, res, () => {
+      req.flash("success", "Signed up as " + newUser.username);
       res.redirect('/games');
     });
 
   } catch(err){
     console.log(err);
-    res.send("Error in signing up", err);
+    req.flash("error", "Could not sign you up.");
+    res.redirect("/games");
   }
 })
 
@@ -37,13 +39,16 @@ router.get("/login", (req, res) => {
 //Login the user
 router.post("/login", passport.authenticate('local', {
   successRedirect: '/games',
-  failureRedirect: '/login'
+  failureRedirect: '/login',
+  successFlash: "Successfully logged in",
+  failureFlash: "Failed to log in. Please ensure your username and password are correct"
 }));
 
 
 //Logout the user
 router.get("/logout", (req, res) => {
   req.logout();
+  req.flash("success", "Successfully logged out");
   res.redirect("/games")
 })
 

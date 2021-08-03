@@ -44,10 +44,12 @@ router.post("/games", isLoggedIn, async (req, res) => {
   try {
     let game = await Game.create(newGame);
     console.log(game);
+    req.flash("success", "Game created!");
     res.redirect("/games/" + game._id);
   } catch(err){
     console.log("Error");
-    res.send("Error");
+    req.flash("error", "Failed to create game.");
+    res.redirect("/games");
   }
 });
 
@@ -129,10 +131,12 @@ router.put("/games/:id", checkGameOwner, async (req, res) => {
   }
   try {
     let game = await Game.findByIdAndUpdate(req.params.id, updatedGame, {new: true}).exec();
+    req.flash("success", "Game updated!");
     res.redirect(`/games/${req.params.id}`);
   } catch(err) {
-    console.log("Error");
-    res.send("Error");
+    console.log(err);
+    req.flash("error", "Failed to update this game.");
+    res.redirect("/games/" + req.params._id);
   }
 });
 
@@ -141,10 +145,12 @@ router.delete("/games/:id", checkGameOwner, async (req, res) => {
   try {
     let game = await Game.findByIdAndDelete(req.params.id).exec();
     console.log("Deleted Game:", game);
+    req.flash("success", "Game deleted");
     res.redirect("/games");
   } catch(err) {
-    console.log("Error");
-    res.send("Error");
+    console.log(err);
+    req.flash("error", "Failed to delete this game.");
+    res.redirect("/games/" + req.params._id);
   }
 });
 

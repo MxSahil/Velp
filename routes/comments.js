@@ -20,9 +20,12 @@ router.post("/games/:id/comments", isLoggedIn, async (req, res) =>{
       text: req.body.text,
       gameID: req.body.gameID,
     });
+    req.flash("success", "Comment posted!");
     res.redirect(`/games/${req.body.gameID}`);
   } catch(err) {
-    res.send(err);
+    console.log(err);
+    req.flash("error", "Failed to post comment");
+    res.redirect(`/games/${req.body.gameID}`);
   }
 });
 
@@ -43,9 +46,12 @@ router.put("/games/:id/comments/:commentid", checkCommentOwner, async (req, res)
 
     try {
       let comment = await Comment.findByIdAndUpdate(req.params.commentid, {text: req.body.text}, {new: true});
+      req.flash("success", "Comment updated!");
       res.redirect(`/games/${req.params.id}`);
     } catch(err){
-      res.send("ERROR");
+      console.log(err);
+      req.flash("error", "Failed to update comment");
+      res.redirect(`/games/${req.params.id}`);
     }
 });
 
@@ -53,9 +59,12 @@ router.put("/games/:id/comments/:commentid", checkCommentOwner, async (req, res)
 router.delete("/games/:id/comments/:commentid", checkCommentOwner, async (req, res) => {
   try {
     let comment = await Comment.findByIdAndDelete(req.params.commentid);
+    req.flash("success", "Comment deleted!");
     res.redirect(`/games/${req.params.id}`);
   } catch(err){
-    res.send("ERROR");
+    console.log(err);
+    req.flash("error", "Failed to delete comment");
+    res.redirect(`/games/${req.params.id}`);
   }
 });
 
