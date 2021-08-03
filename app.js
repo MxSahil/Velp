@@ -11,6 +11,8 @@ const morgan = require("morgan");
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const expressSession = require('express-session');
+const flash = require('connect-flash');
+
 
 //Config Imports
 try {
@@ -65,6 +67,12 @@ app.use(expressSession({
   saveUninitialized: false
 }));
 
+// Method Override Config
+app.use(methodOverride("_method"));
+
+//Connect-Flash Config
+app.use(flash());
+
 //PASSPORT Config
 app.use(passport.initialize());
 app.use(passport.session()); //Allows persistent sessions
@@ -78,9 +86,6 @@ app.use(express.static("public"));
 
 // Body Parser Config
 app.use(bodyParser.urlencoded({extended: true}));
-
-// Method Override Config
-app.use(methodOverride("_method"));
 
 //Current User Middleware config
 app.use((req, res, next) => {
