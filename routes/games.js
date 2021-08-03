@@ -63,7 +63,32 @@ router.get("/games/search", async (req, res) => {
     console.log(err);
     res.send("Error - Search")
   }
-})
+});
+
+//Genre
+router.get("/games/genre/:name", async (req, res) => {
+  const validGenres = [
+    "action",
+    "shooter",
+    "rpg",
+    "sport",
+    "adventure",
+    "fighting",
+    "racing",
+    "strategy",
+    "casual",
+    "simulation",
+    "arcade"
+    ]
+    if (validGenres.includes(req.params.name.toLowerCase())){
+      let given = req.params.name.toLowerCase();
+      given = given[0].toUpperCase() + given.slice(1);
+      const games = await Game.find({genres: given}).exec();
+      res.render("games", {games});
+    } else{
+      res.send("Invalid Genre");
+    }
+});
 
 //SHOW a game given the id
 router.get("/games/:id" , async (req, res) =>{

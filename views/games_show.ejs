@@ -70,15 +70,17 @@
         </tbody>
       </table>
 
-      <div class="d-flex justify-content-center">
-        <a href="/games/<%=game._id%>/edit">
-          <button type="button" class="btn btn-outline-success btn-lg btn-block mx-3">Edit Game</button>
-        </a>
+      <% if (user && user.username === game.owner.username)  {%>
+        <div class="d-flex justify-content-center">
+          <a href="/games/<%=game._id%>/edit">
+            <button type="button" class="btn btn-outline-success btn-lg btn-block mx-3">Edit Game</button>
+          </a>
 
-        <form action="/games/<%=game._id%>?_method=DELETE" method="POST">
-          <button type="submit" class="btn btn-outline-danger btn-lg btn-block mx-3">Delete Game</button>
-        </form>
-      </div>
+          <form action="/games/<%=game._id%>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-outline-danger btn-lg btn-block mx-3">Delete Game</button>
+          </form>
+        </div>
+      <% } %>
 
       <!-- <div class="row">
         <div class="col-4">
@@ -124,14 +126,16 @@
           <td scope="row" style="word-wrap: break-word"><%=c.user.username%></td>
           <td>
             <!-- <div class="d-flex justify-content-around flex-column"> -->
-              <a class="btn btn-outline-success btn-sm btn-block mx-1 mb-1 w-75" href="/games/<%=game._id%>/comments/<%=c._id%>/edit">
-                Edit
-              </a>
-              <form action="/games/<%=game._id%>/comments/<%=c._id%>?_method=DELETE" method="POST">
-                <button type="submit" class="btn btn-outline-danger btn-sm btn-block mx-1 mb-1 w-75">
-                  Delete
-                </button>
-              </form>
+            <% if (user && user.username === c.user.username)  {%>
+                <a class="btn btn-outline-success btn-sm btn-block mx-1 mb-1 w-75" href="/games/<%=game._id%>/comments/<%=c._id%>/edit">
+                  Edit
+                </a>
+                <form action="/games/<%=game._id%>/comments/<%=c._id%>?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-outline-danger btn-sm btn-block mx-1 mb-1 w-75">
+                    Delete
+                  </button>
+                </form>
+            <% } %>
             <!-- </div> -->
           </td>
           <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"><%=c.text%></td>

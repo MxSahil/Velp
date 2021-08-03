@@ -19,7 +19,7 @@ const gameSchema = new mongoose.Schema({
 });
 
 gameSchema.index({
-  '$**': 'text'
+  '$**': 'text',
 });
 const Game = mongoose.model("game", gameSchema);
 module.exports = Game;
