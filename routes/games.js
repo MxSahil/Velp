@@ -107,14 +107,17 @@ router.post("/games/vote", isLoggedIn, async (req, res) => {
       game.upvotes.push(req.user.username);
       game.save();
       response.message = "Upvote recorded";
+      response.code = 1;
 
     } else if (req.body.vote === "down"){
       game.downvotes.push(req.user.username);
       game.save();
       response.message = "Downvote recorded";
+      response.code = -1;
 
     } else {
-      response.message = "Error 1: Not voted yet"
+      response.message = "Error 1: Not voted yet";
+      response.code = "err";
     }
 
   } else if (checkUpvote >= 0) { // already upvoted
@@ -122,13 +125,16 @@ router.post("/games/vote", isLoggedIn, async (req, res) => {
       game.upvotes.splice(checkUpvote, 1);
       game.save();
       response.message = "Upvote removed";
+      response.code = 0;
     } else if (req.body.vote === "down"){
       game.upvotes.splice(checkUpvote, 1);
       game.downvotes.push(req.user.username)
       game.save();
       response.message = "Upvote changed to Downvote";
+      response.code = -1;
     } else {
-      response.message = "Error 2: already upvoted"
+      response.message = "Error 2: already upvoted";
+      response.code = "err";
     }
 
   } else if (checkDownvote >= 0) { // already downvoted
@@ -137,17 +143,22 @@ router.post("/games/vote", isLoggedIn, async (req, res) => {
       game.upvotes.push(req.user.username)
       game.save();
       response.message = "Downvote changed to Upvote";
+      response.code = 1;
     } else if (req.body.vote === "down"){
       game.downvotes.splice(checkDownvote, 1);
       game.save();
       response.message = "Downvote removed";
+      response.code = 0;
     } else {
       response.message = "Error 3: already downvoted"
+      response.code = "err";
     }
 
   } else { //error
-    response.message = "Error 4"
+    response.message = "Error 4";
+    response.code = "err";
   }
+  response.score = game.upvotes.length - game.downvotes.length;
   res.json(response);
 
 })

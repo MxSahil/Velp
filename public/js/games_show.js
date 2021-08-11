@@ -28,11 +28,36 @@ const send_vote = async(vote_type) => {
   })
   .then(res => {
     console.log(res);
+    handle_vote(res.score, res.code);
   })
   .catch(err => {
     console.log(err);
   });
+}
 
+const handle_vote = (newScore, code) => {
+  score.innerText = newScore;
+  if (code === 0){
+    upvote_button.classList.remove("btn-success");
+    upvote_button.classList.add("btn-outline-success");
+    downvote_button.classList.remove("btn-danger");
+    downvote_button.classList.add("btn-outline-danger");
+
+  } else if (code === -1) {
+    upvote_button.classList.remove("btn-success");
+    upvote_button.classList.add("btn-outline-success");
+    downvote_button.classList.remove("btn-outline-danger");
+    downvote_button.classList.add("btn-danger");
+
+  } else if (code === 1) {
+    upvote_button.classList.remove("btn-outline-success");
+    upvote_button.classList.add("btn-success");
+    downvote_button.classList.remove("btn-danger");
+    downvote_button.classList.add("btn-outline-danger");
+
+  } else {
+    console.log("Error inside handle_vote")
+  }
 }
 
 upvote_button.addEventListener("click", async function() {

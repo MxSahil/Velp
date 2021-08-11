@@ -107,12 +107,18 @@
       <button type="button" class="btn btn-outline-primary btn-lg btn-block mb-3">Add Comment</button>
     </a>
     <div class="col-md-10">
-      <% if (user) { %>
-        <button type="button" id="upvote_button" class="btn btn-outline-success btn-lg btn-block mb-3">+</button>
+      <% if (user && game.upvotes.indexOf(user.username) >= 0) { %>
+        <button type="button" id="upvote_button" class="btn btn-success btn-lg btn-block mb-3 mx-2">+</button>
+      <% } else if (user) {%>
+        <button type="button" id="upvote_button" class="btn btn-outline-success btn-lg btn-block mb-3 mx-2">+</button>
       <% } %>
-      <span id="vote_score">10</span>
-      <% if (user) { %>
-        <button type="button" id="downvote_button" class="btn btn-outline-danger btn-lg btn-block mb-3">-</button>
+      <span id="vote_score" class="mx-1">
+        <%= game.upvotes.length - game.downvotes.length %>
+      </span>
+      <% if (user && game.downvotes.indexOf(user.username) >= 0) { %>
+        <button type="button" id="downvote_button" class="btn btn-danger btn-lg btn-block mb-3 mx-2">-</button>
+      <% } else if (user) {%>
+        <button type="button" id="downvote_button" class="btn btn-outline-danger btn-lg btn-block mb-3 mx-2">-</button>
       <% } %>
     </div>
   </div>
