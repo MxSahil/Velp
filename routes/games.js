@@ -39,7 +39,9 @@ router.post("/games", isLoggedIn, async (req, res) => {
     owner: {
       id: req.user._id,
       username: req.user.username
-    }
+    },
+    upvotes: [],
+    downvotes: []
   }
   try {
     let game = await Game.create(newGame);
@@ -92,6 +94,64 @@ router.get("/games/genre/:name", async (req, res) => {
     }
 });
 
+// Voting
+router.post("/games/vote", isLoggedIn, async (req, res) => {
+  console.log("Request Body:", req.body);
+  const game = await Game.findById(req.body.gameId);
+  const checkUpvote = game.upvotes.indexOf(req.user.username);
+  const checkDownvote = game.downvotes.indexOf(req.user.username);
+
+  let response = {};
+  if (checkUpvote === -1 && checkDownvote === -1) { //Not voted yet
+    if (req.body.vote === "up"){
+      game.upvotes.push(req.user.username);
+      game.save();
+      response.message = "Upvote recorded";
+
+    } else if (req.body.vote === "down"){
+      game.downvotes.push(req.user.username);
+      game.save();
+      response.message = "Downvote recorded";
+
+    } else {
+      response.message = "Error 1: Not voted yet"
+    }
+
+  } else if (checkUpvote >= 0) { // already upvoted
+    if (req.body.vote === "up"){
+      game.upvotes.splice(checkUpvote, 1);
+      game.save();
+      response.message = "Upvote removed";
+    } else if (req.body.vote === "down"){
+      game.upvotes.splice(checkUpvote, 1);
+      game.downvotes.push(req.user.username)
+      game.save();
+      response.message = "Upvote changed to Downvote";
+    } else {
+      response.message = "Error 2: already upvoted"
+    }
+
+  } else if (checkDownvote >= 0) { // already downvoted
+    if (req.body.vote === "up"){
+      game.downvotes.splice(checkDownvote, 1);
+      game.upvotes.push(req.user.username)
+      game.save();
+      response.message = "Downvote changed to Upvote";
+    } else if (req.body.vote === "down"){
+      game.downvotes.splice(checkDownvote, 1);
+      game.save();
+      response.message = "Downvote removed";
+    } else {
+      response.message = "Error 3: already downvoted"
+    }
+
+  } else { //error
+    response.message = "Error 4"
+  }
+  res.json(response);
+
+})
+
 //SHOW a game given the id
 router.get("/games/:id" , async (req, res) =>{
   try {
@@ -127,7 +187,9 @@ router.put("/games/:id", checkGameOwner, async (req, res) => {
     publisher: req.body.publishers,
     platforms: req.body.platforms,
     metacritic: req.body.metacritic,
-    esrb: req.body.esrb
+    esrb: req.body.esrb,
+    upvotes: req.body.upvotes,
+    downvotes: req.body.downvotes
   }
   try {
     let game = await Game.findByIdAndUpdate(req.params.id, updatedGame, {new: true}).exec();

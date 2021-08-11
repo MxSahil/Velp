@@ -15,7 +15,9 @@ const gameSchema = new mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectID,
                 ref: "User"
               },
-          username: String}
+          username: String},
+  upvotes: Array,
+  downvotes: Array
 });
 
 gameSchema.index({

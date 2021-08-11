@@ -83,6 +83,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 // Express Config
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(express.json({
+  type: ['application/json', "text/plain"]
+}));
 
 // Body Parser Config
 app.use(bodyParser.urlencoded({extended: true}));

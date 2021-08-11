@@ -102,21 +102,34 @@
     </div>
   </div>
 
-  <h5 class="CommentSection">
-    Comments Section
-  </h5>
-
-  <a href="/games/<%=game._id%>/comments/new">
-    <button type="button" class="btn btn-outline-primary btn-lg btn-block mb-3">Add Comment</button>
-  </a>
+  <div class="row mt-5">
+    <a href="/games/<%=game._id%>/comments/new" class="col-md-2">
+      <button type="button" class="btn btn-outline-primary btn-lg btn-block mb-3">Add Comment</button>
+    </a>
+    <div class="col-md-10">
+      <% if (user) { %>
+        <button type="button" id="upvote_button" class="btn btn-outline-success btn-lg btn-block mb-3">+</button>
+      <% } %>
+      <span id="vote_score">10</span>
+      <% if (user) { %>
+        <button type="button" id="downvote_button" class="btn btn-outline-danger btn-lg btn-block mb-3">-</button>
+      <% } %>
+    </div>
+  </div>
 
   <div class="col-md-12 mb-3 details-container">
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col" class="border-bottom-0 col-2">Username</th>
-          <th scope="col" class="border-bottom-0 col-2"></th>
-          <th scope="col" class="border-bottom-0 col-8">Comment</th>
+          <% if (comments.length === 0) { %>
+            <th scope="col" class="border-bottom-0 col-2">No comments have been posted yet :/</th>
+          <% } else {%>
+            <th scope="col" class="border-bottom-0 col-2">Username</th>
+            <th scope="col" class="border-bottom-0 col-2"></th>
+            <th scope="col" class="border-bottom-0 col-8">Comment</th>
+          <% } %>
+
+
         </tr>
       </thead>
       <tbody>
@@ -148,5 +161,10 @@
 
   </div>
 </div>
+
+<script>
+  var gameId = "<%- game._id %>"
+</script>
+<script src="/js/games_show.js"></script>
 
 <%- include("partials/footer") %>
