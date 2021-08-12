@@ -1,6 +1,39 @@
 <%- include("partials/header") %>
-<!-- <div class="container d-flex flex-row border rounded">
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 mb-3 img-container">
+      <img class="rounded mx-auto d-block" alt="NES controller image" src="https://i.dlpng.com/static/png/6666675_preview.png">
+    </div>
+
+    <div class="col-md-6 mb-3 details-container">
+      <h1 class="mt-5">Welcome to Velp!</h1>
+      <h4>A Yelp-style application for sharing and discussing video games.</h4>
+      <div class="d-flex flex-row justify-content-center">
+        <a href="/games">
+          <button type="button" class="btn btn-outline-primary btn-lg btn-block mx-2">Browse Games</button>
+        </a>
+        <% if (user) { %>
+          <a href="/logout">
+            <button type="button" class="btn btn-outline-primary btn-lg btn-block mx-2">Log Out</button>
+          </a>
+
+        <% } else { %>
+          <a href="/login">
+            <button type="button" class="btn btn-outline-primary btn-lg btn-block mx-2">Log In</button>
+          </a>
+
+          <a href="/signup">
+            <button type="button" class="btn btn-outline-primary btn-lg btn-block mx-2">Sign Up</button>
+          </a>
+        <% } %>
+
+      </div>
+    </div>
 
 
-</div> -->
+
+  </div>
+
+
+</div>
 <%- include("partials/footer") %>
