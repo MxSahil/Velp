@@ -5,6 +5,7 @@ const checkGameOwner = require('../utils/checkGameOwner');
 
 const Game = require('../models/game');
 const Comment = require('../models/comment');
+const User = require("../models/user");
 
 //INDEX the games
 router.get("/games", async (req, res) => {
@@ -92,6 +93,109 @@ router.get("/games/genre/:name", async (req, res) => {
     } else{
       res.send("Invalid Genre");
     }
+});
+
+//Add game to your want, playing or completed collection
+router.post("/games/collection", isLoggedIn, async (req, res) => {
+  console.log("Request Body:", req.body);
+  const game = await Game.findById(req.body.gameId);
+  const checkWant = req.user.want.indexOf(game._id)
+  const checkPlaying = req.user.playing.indexOf(game._id)
+  const checkCompleted = req.user.completed.indexOf(game._id)
+
+  let response = {};
+  if (checkWant === -1 && checkPlaying === -1 && checkCompleted === -1) {
+    if (req.body.collection === "want") {
+      req.user.want.push(game._id);
+      req.user.save();
+      response.message = "want";
+      response.code = 1;
+    } else if (req.body.collection === "playing") {
+      req.user.playing.push(game._id);
+      req.user.save();
+      response.message = "playing";
+      response.code = 2;
+    } else if (req.body.collection === "completed") {
+      req.user.completed.push(game._id);
+      req.user.save();
+      response.message = "completed";
+      response.code = 3;
+    } else {
+      response.message = "Error 1";
+      response.code = "err";
+    }
+  } else if (checkWant >= 0 && checkPlaying === -1 && checkCompleted === -1) {
+    if (req.body.collection === "want") {
+      req.user.want.splice(checkWant, 1);
+      req.user.save();
+      response.message = "want removed";
+      response.code = 0;
+    } else if (req.body.collection === "playing") {
+      req.user.want.splice(checkWant, 1);
+      req.user.playing.push(game._id);
+      req.user.save();
+      response.message = "want changed to playing";
+      response.code = 2;
+    } else if (req.body.collection === "completed") {
+      req.user.want.splice(checkWant, 1);
+      req.user.completed.push(game._id);
+      req.user.save();
+      response.message = "want changed to completed";
+      response.code = 3;
+    } else {
+      response.message = "Error 2";
+      response.code = "err";
+    }
+  } else if (checkWant === -1 && checkPlaying >= 0 && checkCompleted === -1) {
+    if (req.body.collection === "want") {
+      req.user.playing.splice(checkPlaying, 1);
+      req.user.want.push(game._id);
+      req.user.save();
+      response.message = "playing changed to want";
+      response.code = 1;
+    } else if (req.body.collection === "playing") {
+      req.user.playing.splice(checkPlaying, 1);
+      req.user.save();
+      response.message = "playing removed";
+      response.code = 0;
+    } else if (req.body.collection === "completed") {
+      req.user.playing.splice(checkPlaying, 1);
+      req.user.completed.push(game._id);
+      req.user.save();
+      response.message = "playing changed to completed";
+      response.code = 3;
+    } else {
+      response.message = "Error 3";
+      response.code = "err";
+    }
+  } else if (checkWant === -1 && checkPlaying === -1 && checkCompleted >= 0) {
+    if (req.body.collection === "want") {
+      req.user.completed.splice(checkCompleted, 1);
+      req.user.want.push(game._id);
+      req.user.save();
+      response.message = "completed changed to want";
+      response.code = 1;
+    } else if (req.body.collection === "playing") {
+      req.user.completed.splice(checkCompleted, 1);
+      req.user.playing.push(game._id);
+      req.user.save();
+      response.message = "completed changed to playing";
+      response.code = 2;
+    } else if (req.body.collection === "completed") {
+      req.user.completed.splice(checkCompleted, 1);
+      req.user.save();
+      response.message = "completed removed";
+      response.code = 0;
+    } else {
+      response.message = "Error 4";
+      response.code = "err";
+    }
+  } else {
+    response.message = "Error 5";
+    response.code = "err";
+  }
+  res.json(response);
+
 });
 
 // Voting

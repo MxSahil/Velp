@@ -56,6 +56,18 @@
   text-align: center;
 }
 
+.game-experience-icons-clicked{
+  width: 100px;
+  filter: invert(53%) sepia(37%) saturate(6735%) hue-rotate(164deg) brightness(98%) contrast(101%);
+}
+
+.game-experience-text-clicked{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  filter: invert(53%) sepia(37%) saturate(6735%) hue-rotate(164deg) brightness(98%) contrast(101%);
+}
+
 .img-container img{
   width: 75%;
 }

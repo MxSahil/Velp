@@ -2,6 +2,13 @@
 const upvote_button = document.getElementById("upvote_button");
 const downvote_button = document.getElementById("downvote_button");
 const score = document.getElementById("vote_score");
+const want_button = document.getElementById("want-icon");
+const playing_button = document.getElementById("playing-icon");
+const completed_button = document.getElementById("completed-icon");
+const want_text = document.getElementById("want-text");
+const playing_text = document.getElementById("playing-text");
+const completed_text = document.getElementById("completed-text");
+
 
 //Add event listeners
 const send_vote = async(vote_type) => {
@@ -60,6 +67,112 @@ const handle_vote = (newScore, code) => {
   }
 }
 
+
+const send_collection = async (collection_type) => {
+  //build fetch options
+  const options = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  if (collection_type === 'want') {
+    options.body = JSON.stringify({collection: "want", gameId})
+  } else if (collection_type === 'playing'){
+    options.body = JSON.stringify({collection: "playing", gameId})
+  } else if (collection_type === 'completed'){
+    options.body = JSON.stringify({collection: "completed", gameId})
+  } else {
+    throw "Collection must be either 'want', 'playing' or 'completed'."
+  }
+
+  //send fetch request
+  await fetch("/games/collection", options)
+  .then(data => {
+    return data.json()
+  })
+  .then(res => {
+    console.log(res);
+    handle_collection(res.code)
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+
+const handle_collection = (code) => {
+  console.log(code);
+  if (code === 1){
+    want_button.classList.remove("game-experience-icons")
+    want_text.classList.remove("game-experience-text")
+    want_button.classList.add("game-experience-icons-clicked")
+    want_text.classList.add("game-experience-text-clicked")
+
+    playing_button.classList.remove("game-experience-icons-clicked")
+    playing_text.classList.remove("game-experience-text-clicked")
+    playing_button.classList.add("game-experience-icons")
+    playing_text.classList.add("game-experience-text")
+
+    completed_button.classList.remove("game-experience-icons-clicked")
+    completed_text.classList.remove("game-experience-text-clicked")
+    completed_button.classList.add("game-experience-icons")
+    completed_text.classList.add("game-experience-text")
+
+  } else if (code === 2) {
+    want_button.classList.remove("game-experience-icons-clicked")
+    want_text.classList.remove("game-experience-text-clicked")
+    want_button.classList.add("game-experience-icons")
+    want_text.classList.add("game-experience-text")
+
+    playing_button.classList.remove("game-experience-icons")
+    playing_text.classList.remove("game-experience-text")
+    playing_button.classList.add("game-experience-icons-clicked")
+    playing_text.classList.add("game-experience-text-clicked")
+
+    completed_button.classList.remove("game-experience-icons-clicked")
+    completed_text.classList.remove("game-experience-text-clicked")
+    completed_button.classList.add("game-experience-icons")
+    completed_text.classList.add("game-experience-text")
+
+  } else if (code === 3) {
+    want_button.classList.remove("game-experience-icons-clicked")
+    want_text.classList.remove("game-experience-text-clicked")
+    want_button.classList.add("game-experience-icons")
+    want_text.classList.add("game-experience-text")
+
+    playing_button.classList.remove("game-experience-icons-clicked")
+    playing_text.classList.remove("game-experience-text-clicked")
+    playing_button.classList.add("game-experience-icons")
+    playing_text.classList.add("game-experience-text")
+
+    completed_button.classList.remove("game-experience-icons")
+    completed_text.classList.remove("game-experience-text")
+    completed_button.classList.add("game-experience-icons-clicked")
+    completed_text.classList.add("game-experience-text-clicked")
+
+  } else if (code === 0) {
+    want_button.classList.remove("game-experience-icons-clicked")
+    want_text.classList.remove("game-experience-text-clicked")
+    want_button.classList.add("game-experience-icons")
+    want_text.classList.add("game-experience-text")
+
+    playing_button.classList.remove("game-experience-icons-clicked")
+    playing_text.classList.remove("game-experience-text-clicked")
+    playing_button.classList.add("game-experience-icons")
+    playing_text.classList.add("game-experience-text")
+
+    completed_button.classList.remove("game-experience-icons-clicked")
+    completed_text.classList.remove("game-experience-text-clicked")
+    completed_button.classList.add("game-experience-icons")
+    completed_text.classList.add("game-experience-text")
+  } else {
+    console.log("Error inside handle_collection")
+
+  }
+
+}
+
 upvote_button.addEventListener("click", async function() {
   send_vote('up');
 });
@@ -67,3 +180,27 @@ upvote_button.addEventListener("click", async function() {
 downvote_button.addEventListener("click", async function() {
   send_vote('down');
 });
+
+want_button.addEventListener("click", async function() {
+  send_collection("want")
+})
+
+want_text.addEventListener("click", async function() {
+  send_collection("want")
+})
+
+playing_button.addEventListener("click", async function() {
+  send_collection("playing")
+})
+
+playing_text.addEventListener("click", async function() {
+  send_collection("playing")
+})
+
+completed_button.addEventListener("click", async function() {
+  send_collection("completed")
+})
+
+completed_text.addEventListener("click", async function() {
+  send_collection("completed")
+})

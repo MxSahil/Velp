@@ -82,22 +82,43 @@
         </div>
       <% } %>
 
-      <!-- <div class="row">
-        <div class="col-4">
-          <img class="mx-auto d-block game-experience-icons" alt="Want"  src="https://icons.iconarchive.com/icons/danieledesantis/christmas/512/gift-icon.png">
-          <h4 class="game-experience-text">Want</h4>
-        </div>
+      <div class="row mt-5">
+        <% if (user && user.want.indexOf(game._id) >= 0) {%>
+          <div class="col-4" id="want">
+            <img class="mx-auto d-block game-experience-icons-clicked" id="want-icon" alt="Want" src="https://icons.iconarchive.com/icons/danieledesantis/christmas/512/gift-icon.png">
+            <h4 class="game-experience-text-clicked" id="want-text">Want</h4>
+          </div>
+        <% } else if (user) {%>
+          <div class="col-4" id="want">
+            <img class="mx-auto d-block game-experience-icons" id="want-icon" alt="Want" src="https://icons.iconarchive.com/icons/danieledesantis/christmas/512/gift-icon.png">
+            <h4 class="game-experience-text" id="want-text">Want</h4>
+          </div>
+        <% } %>
 
-        <div class="col-4">
-          <img class="mx-auto d-block game-experience-icons" alt="Playing"  src="https://static.thenounproject.com/png/2879647-200.png">
-          <h4 class="game-experience-text">Playing</h4>
-        </div>
+        <% if (user && user.playing.indexOf(game._id) >= 0) {%>
+          <div class="col-4" id="playing">
+            <img class="mx-auto d-block game-experience-icons-clicked" alt="Playing" id="playing-icon" src="https://static.thenounproject.com/png/2879647-200.png">
+            <h4 class="game-experience-text-clicked" id="playing-text">Playing</h4>
+          </div>
+        <% } else if (user) {%>
+          <div class="col-4" id="playing">
+            <img class="mx-auto d-block game-experience-icons" alt="Playing" id="playing-icon" src="https://static.thenounproject.com/png/2879647-200.png">
+            <h4 class="game-experience-text" id="playing-text">Playing</h4>
+          </div>
+        <% } %>
 
-        <div class="col-4">
-          <img class="mx-auto d-block game-experience-icons" alt="Completed"  src="https://static.thenounproject.com/png/463939-200.png">
-          <h4 class="game-experience-text">Completed</h4>
-        </div>
-      </div> -->
+        <% if (user && user.completed.indexOf(game._id) >= 0) {%>
+          <div class="col-4" id="completed">
+            <img class="mx-auto d-block game-experience-icons-clicked" alt="Completed" id="completed-icon" src="https://static.thenounproject.com/png/463939-200.png">
+            <h4 class="game-experience-text-clicked" id="completed-text">Completed</h4>
+          </div>
+        <% } else if (user) {%>
+          <div class="col-4" id="completed">
+            <img class="mx-auto d-block game-experience-icons" alt="Completed" id="completed-icon" src="https://static.thenounproject.com/png/463939-200.png">
+            <h4 class="game-experience-text" id="completed-text">Completed</h4>
+          </div>
+        <% } %>
+      </div>
 
     </div>
   </div>
