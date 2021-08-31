@@ -303,10 +303,9 @@ router.put("/games/:id", checkGameOwner, async (req, res) => {
     platforms: req.body.platforms,
     metacritic: req.body.metacritic,
     esrb: req.body.esrb,
-    upvotes: req.body.upvotes,
-    downvotes: req.body.downvotes
   }
   try {
+    console.log(updatedGame)
     let game = await Game.findByIdAndUpdate(req.params.id, updatedGame, {new: true}).exec();
     req.flash("success", "Game updated!");
     res.redirect(`/games/${req.params.id}`);
