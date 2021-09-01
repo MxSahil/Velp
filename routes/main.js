@@ -13,7 +13,7 @@ router.get("/my-account", isLoggedIn, (req, res) => {
   res.render("account");
 });
 
-router.post("/my-account/collection", isLoggedIn, (req, res) => {
+router.post("/my-account/collection", (req, res) => {
   res.json({message: "test"})
 })
 
