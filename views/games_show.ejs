@@ -135,7 +135,7 @@
           <button type="button" id="upvote_button" class="btn btn-outline-success btn-lg btn-block mb-3 mx-2">+</button>
         <% } %>
         <span id="vote_score" class="mx-1">
-          <%= game.upvotes.length - game.downvotes.length %>
+          <%= game.upvotes.length - game.downvotes.length %> Upvotes
         </span>
         <% if (user && game.downvotes.indexOf(user.username) >= 0) { %>
           <button type="button" id="downvote_button" class="btn btn-danger btn-lg btn-block mb-3 mx-2">-</button>
@@ -197,7 +197,7 @@
           <h3> Order From Amazon </h3>
           <img style="width:45px" src="https://i.pinimg.com/originals/09/98/f7/0998f77b2e4b44df9ca752ea3d694b61.png" alt="Amazon Logo">
         </div>
-        <% for (let i = 0; i < 8; i++) { %>
+        <% for (let i = 0; i < 8 && i < response.result.length; i++) { %>
           <div class="col m-1">
             <div class="shadow card" style="width: 18rem;">
               <a href=<%=response.result[i].url%> target="_blank">

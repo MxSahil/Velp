@@ -38,16 +38,12 @@ const User = require('./models/user');
 // DEVELOPEMENT
 // ===========================
 // Morgan
-app.use(morgan('tiny'));
+// app.use(morgan('tiny'));
 
 // Seed the DB
 // const seed = require('./utils/seed');
 // seed();
 
-
-// ===========================
-// DEVELOPEMENT
-// ===========================
 // MongoDB connection
 console.log("Connecting to MongoDB")
 try {
