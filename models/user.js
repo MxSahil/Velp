@@ -5,7 +5,8 @@ userSchema = new mongoose.Schema({
   username: {type: String, unique: true, required: true},
   want: Array,
   playing: Array,
-  completed: Array
+  completed: Array,
+  avatar: String
 });
 
 userSchema.plugin(passportLocalMongoose);

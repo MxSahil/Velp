@@ -4,7 +4,8 @@ const commentSchema = new mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectID,
                 ref: "User"
               },
-        username: String},
+        username: String,
+        avatar: String},
   text: String,
   gameID: {
     type: mongoose.Schema.Types.ObjectID,

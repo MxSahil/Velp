@@ -16,7 +16,7 @@ router.get("/games/:id/comments/new", isLoggedIn, (req, res) =>{
 router.post("/games/:id/comments", isLoggedIn, async (req, res) =>{
   try {
     let comment = await Comment.create({
-      user: {id: req.user._id, username: req.user.username},
+      user: {id: req.user._id, username: req.user.username, avatar: req.user.avatar},
       text: req.body.text,
       gameID: req.body.gameID,
     });

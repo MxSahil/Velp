@@ -163,7 +163,10 @@
 
             <% comments.forEach((c => { %>
             <tr>
-              <td scope="row" style="word-wrap: break-word"><%=c.user.username%></td>
+              <td scope="row" style="word-wrap: break-word">
+                <img src=<%=c.user.avatar%> alt="user profile picture" height="50" width="50">
+                <p><%=c.user.username%></p>
+              </td>
               <td>
                 <!-- <div class="d-flex justify-content-around flex-column"> -->
                 <% if (user && user.username === c.user.username)  {%>

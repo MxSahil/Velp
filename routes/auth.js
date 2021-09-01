@@ -11,12 +11,17 @@ router.get("/signup", (req, res) => {
 //Sign up - Create new User
 router.post("/signup", async (req, res) => {
   try {
+    avatar = req.body.avatar
+    if (avatar === '') {
+      avatar = "/images/abstract-user-flat-4.svg"
+    }
     const newUser = await User.register(new User({
         email: req.body.email,
         username: req.body.username,
         want: [],
         playing: [],
-        completed: []
+        completed: [],
+        avatar: avatar
         }),
         req.body.password);
 
