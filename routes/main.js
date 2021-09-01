@@ -9,8 +9,12 @@ router.get("/", (req, res) => {
 });
 
 //Account page
-router.get("/account", isLoggedIn, (req, res) => {
+router.get("/my-account", isLoggedIn, (req, res) => {
   res.render("account");
 });
+
+router.post("/my-account/collection", isLoggedIn, (req, res) => {
+  res.json({message: "test"})
+})
 
 module.exports = router;

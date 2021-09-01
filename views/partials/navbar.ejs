@@ -42,13 +42,15 @@
           </ul>
         </li>
 
-        <% if (user) { %>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/games/new">Add Game</a>
           </li>
-        <% } %>
 
         <% if (user) { %>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/my-account">My Account</a>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/logout">Log Out</a>
           </li>

@@ -48,12 +48,23 @@
 
 .game-experience-icons{
   width: 100px;
+  filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(284deg) brightness(96%) contrast(107%);
 }
 
 .game-experience-text{
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(284deg) brightness(96%) contrast(107%);
+}
+
+.game-experience-icons:hover {
+    filter: invert(53%) sepia(37%) saturate(6735%) hue-rotate(164deg) brightness(98%) contrast(101%);
+    cursor: pointer;
+}
+
+.game-experience-text:hover {
+    cursor: pointer;
 }
 
 .game-experience-icons-clicked{
@@ -66,6 +77,15 @@
   margin-right: auto;
   text-align: center;
   filter: invert(53%) sepia(37%) saturate(6735%) hue-rotate(164deg) brightness(98%) contrast(101%);
+}
+
+.game-experience-icons-clicked:hover {
+    filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(284deg) brightness(96%) contrast(107%);
+    cursor: pointer;
+}
+
+.game-experience-text-clicked:hover {
+    cursor: pointer;
 }
 
 .img-container img{
