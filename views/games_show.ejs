@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-md-6 mb-3 details-container">
-      <h1><%=game.title%></h1>
+      <h1 style=><%=game.title%></h1>
       <p><%=game.description%></p>
       <table class="table table-striped">
         <thead>
@@ -47,7 +47,7 @@
 
           <tr>
             <th scope="row">Release Date</th>
-            <td><%= game.releaseDate %></td>
+            <td><%= game.releaseDate.toLocaleDateString('en-US') %></td>
           </tr>
 
           <tr>
@@ -123,69 +123,94 @@
     </div>
   </div>
 
-  <div class="row mt-5">
-    <a href="/games/<%=game._id%>/comments/new" class="col-md-2">
-      <button type="button" class="btn btn-outline-primary btn-lg btn-block mb-3">Add Comment</button>
-    </a>
-    <div class="col-md-10">
-      <% if (user && game.upvotes.indexOf(user.username) >= 0) { %>
-        <button type="button" id="upvote_button" class="btn btn-success btn-lg btn-block mb-3 mx-2">+</button>
-      <% } else if (user) {%>
-        <button type="button" id="upvote_button" class="btn btn-outline-success btn-lg btn-block mb-3 mx-2">+</button>
-      <% } %>
-      <span id="vote_score" class="mx-1">
-        <%= game.upvotes.length - game.downvotes.length %>
-      </span>
-      <% if (user && game.downvotes.indexOf(user.username) >= 0) { %>
-        <button type="button" id="downvote_button" class="btn btn-danger btn-lg btn-block mb-3 mx-2">-</button>
-      <% } else if (user) {%>
-        <button type="button" id="downvote_button" class="btn btn-outline-danger btn-lg btn-block mb-3 mx-2">-</button>
-      <% } %>
+  <div class="row mt-4">
+    <div class="col-md-6 mb-3">
+      <div>
+        <a href="/games/<%=game._id%>/comments/new" class="col-md-2" style="text-decoration : none;">
+          <button type="button" class="btn btn-outline-primary btn-lg btn-block mb-3 mr-4">Add Comment</button>
+        </a>
+        <% if (user && game.upvotes.indexOf(user.username) >= 0) { %>
+          <button type="button" id="upvote_button" class="btn btn-success btn-lg btn-block mb-3 mx-2">+</button>
+        <% } else if (user) {%>
+          <button type="button" id="upvote_button" class="btn btn-outline-success btn-lg btn-block mb-3 mx-2">+</button>
+        <% } %>
+        <span id="vote_score" class="mx-1">
+          <%= game.upvotes.length - game.downvotes.length %>
+        </span>
+        <% if (user && game.downvotes.indexOf(user.username) >= 0) { %>
+          <button type="button" id="downvote_button" class="btn btn-danger btn-lg btn-block mb-3 mx-2">-</button>
+        <% } else if (user) {%>
+          <button type="button" id="downvote_button" class="btn btn-outline-danger btn-lg btn-block mb-3 mx-2">-</button>
+        <% } %>
+      </div>
+
+      <div class="col-md-12 mb-3 details-container">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <% if (comments.length === 0) { %>
+                <th scope="col" class="border-bottom-0 col-2">Be the first to comment on this game!</th>
+              <% } else {%>
+                <th scope="col" class="border-bottom-0 col-2">Username</th>
+                <th scope="col" class="border-bottom-0 col-2"></th>
+                <th scope="col" class="border-bottom-0 col-8">Comment</th>
+              <% } %>
+
+
+            </tr>
+          </thead>
+          <tbody>
+
+            <% comments.forEach((c => { %>
+            <tr>
+              <td scope="row" style="word-wrap: break-word"><%=c.user.username%></td>
+              <td>
+                <!-- <div class="d-flex justify-content-around flex-column"> -->
+                <% if (user && user.username === c.user.username)  {%>
+                    <a class="btn btn-outline-success btn-sm btn-block mx-1 mb-1 w-75" href="/games/<%=game._id%>/comments/<%=c._id%>/edit">
+                      Edit
+                    </a>
+                    <form action="/games/<%=game._id%>/comments/<%=c._id%>?_method=DELETE" method="POST">
+                      <button type="submit" class="btn btn-outline-danger btn-sm btn-block mx-1 mb-1 w-75">
+                        Delete
+                      </button>
+                    </form>
+                <% } %>
+                <!-- </div> -->
+              </td>
+              <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"><%=c.text%></td>
+            </tr>
+            <% })) %>
+          </tbody>
+        </table>
+        <div class="py-3"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="col-md-12 mb-3 details-container">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <% if (comments.length === 0) { %>
-            <th scope="col" class="border-bottom-0 col-2">No comments have been posted yet :/</th>
-          <% } else {%>
-            <th scope="col" class="border-bottom-0 col-2">Username</th>
-            <th scope="col" class="border-bottom-0 col-2"></th>
-            <th scope="col" class="border-bottom-0 col-8">Comment</th>
+
+    <div class="col-md-6 mb-3">
+      <div class="row">
+        <div class="d-flex flex-row mx-1">
+          <h3> Order From Amazon </h3>
+          <img style="width:45px" src="https://i.pinimg.com/originals/09/98/f7/0998f77b2e4b44df9ca752ea3d694b61.png" alt="Amazon Logo">
+        </div>
+        <% for (let i = 0; i < 8; i++) { %>
+          <div class="col m-1">
+            <div class="card" style="width: 18rem;">
+              <a href=<%=response.result[i].url%> target="_blank">
+                <img class="card-img-top" src=<%=response.result[i].thumbnail%> alt="Card image cap">
+              </a>
+              <div class="card-body">
+                <h5 class="card-title"><%=response.result[i].title%></h5>
+                <% if (response.result[i].price.current_price > 0)  {%>
+                  <p class="card-text">Price: $<%=response.result[i].price.current_price%></p>
+                <% } %>
+              </div>
+            </div>
+          </div>
           <% } %>
-
-
-        </tr>
-      </thead>
-      <tbody>
-
-        <% comments.forEach((c => { %>
-        <tr>
-          <td scope="row" style="word-wrap: break-word"><%=c.user.username%></td>
-          <td>
-            <!-- <div class="d-flex justify-content-around flex-column"> -->
-            <% if (user && user.username === c.user.username)  {%>
-                <a class="btn btn-outline-success btn-sm btn-block mx-1 mb-1 w-75" href="/games/<%=game._id%>/comments/<%=c._id%>/edit">
-                  Edit
-                </a>
-                <form action="/games/<%=game._id%>/comments/<%=c._id%>?_method=DELETE" method="POST">
-                  <button type="submit" class="btn btn-outline-danger btn-sm btn-block mx-1 mb-1 w-75">
-                    Delete
-                  </button>
-                </form>
-            <% } %>
-            <!-- </div> -->
-          </td>
-          <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"><%=c.text%></td>
-        </tr>
-        <% })) %>
-      </tbody>
-    </table>
-
-    <div class="py-3"> </div>
-
+      </div>
+    </div>
   </div>
 </div>
 
