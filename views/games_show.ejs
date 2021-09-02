@@ -165,7 +165,6 @@
             <tr>
               <td scope="row" style="word-wrap: break-word">
                 <img src=<%=c.user.avatar%> alt="user profile picture" height="50" width="50">
-                <p><%=c.user.username%></p>
               </td>
               <td>
                 <!-- <div class="d-flex justify-content-around flex-column"> -->
@@ -181,7 +180,13 @@
                 <% } %>
                 <!-- </div> -->
               </td>
-              <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"><%=c.text%></td>
+              <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">
+                <div class="d-flex flex-row">
+                  <p><%=c.user.username%></p>
+                  <p class="mx-1" style="color:grey"><%=c.date.toLocaleDateString('en-US')%></p>
+                </div>
+                <p><%=c.text%></p>
+              </td>
             </tr>
             <% })) %>
           </tbody>

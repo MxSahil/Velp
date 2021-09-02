@@ -10,7 +10,8 @@ const commentSchema = new mongoose.Schema({
   gameID: {
     type: mongoose.Schema.Types.ObjectID,
     ref: "game"
-  }
+  },
+  date: Date
 });
 
 const Comment = mongoose.model("comment", commentSchema);
