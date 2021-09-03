@@ -21,7 +21,7 @@ router.get("/my-account", isLoggedIn, async (req, res) => {
 });
 
 router.post("/my-account/collection", isLoggedIn, async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let response = {};
   if (req.body.collectionType === 'myGames') {
     response.message = "Show my games";

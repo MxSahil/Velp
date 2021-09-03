@@ -146,7 +146,7 @@
 
       <div class="col-md-12 mb-3 details-container">
         <table class="table table-striped">
-          <thead>
+          <!-- <thead>
             <tr>
               <% if (comments.length === 0) { %>
                 <th scope="col" class="border-bottom-0 col-2">Be the first to comment on this game!</th>
@@ -155,19 +155,18 @@
                 <th scope="col" class="border-bottom-0 col-2"></th>
                 <th scope="col" class="border-bottom-0 col-8">Comment</th>
               <% } %>
-
-
             </tr>
-          </thead>
+          </thead> -->
           <tbody>
 
             <% comments.forEach((c => { %>
             <tr>
               <td scope="row" style="word-wrap: break-word">
-                <img src=<%=c.user.avatar%> alt="user profile picture" height="50" width="50">
+                <div class="d-flex flex-row justify-content-center">
+                  <img src=<%=c.user.avatar%> alt="user profile picture" height="50" width="50">
+                </div>
               </td>
-              <td>
-                <!-- <div class="d-flex justify-content-around flex-column"> -->
+              <!--  <td>
                 <% if (user && user.username === c.user.username)  {%>
                     <a class="btn btn-outline-success btn-sm btn-block mx-1 mb-1 w-75" href="/games/<%=game._id%>/comments/<%=c._id%>/edit">
                       Edit
@@ -178,14 +177,29 @@
                       </button>
                     </form>
                 <% } %>
-                <!-- </div> -->
-              </td>
+              </td> -->
               <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">
                 <div class="d-flex flex-row">
                   <p><%=c.user.username%></p>
                   <p class="mx-1" style="color:grey"><%=c.date.toLocaleDateString('en-US')%></p>
                 </div>
                 <p><%=c.text%></p>
+                <div class="d-flex flex-row">
+                  <button type="submit" class="btn btn-outline-success btn-sm mb-1 mr-1 commentButton">
+                    <img src="https://static.thenounproject.com/png/12734-200.png" alt="Edit Comment" height="20" width="20">
+                  </button>
+                  <button type="submit" class="btn btn-outline-danger btn-sm mr-1 mb-1 commentButton">
+                    <img src="https://static.thenounproject.com/png/12734-200.png" alt="Edit Comment" height="20" width="20" style="transform:rotate(180deg)">
+                  </button>
+                  <a class="btn btn-outline-success btn-sm mb-1 mr-1 commentButton" href="/games/<%=game._id%>/comments/<%=c._id%>/edit">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/OOjs_UI_icon_edit-ltr.svg/1024px-OOjs_UI_icon_edit-ltr.svg.png" alt="Edit Comment" height="20" width="20">
+                  </a>
+                  <form action="/games/<%=game._id%>/comments/<%=c._id%>?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-outline-danger btn-sm mr-1 mb-1 commentButton">
+                      <img src="https://icon-library.com/images/delete-icon-transparent-background/delete-icon-transparent-background-2.jpg" alt="Edit Comment" height="20" width="20">
+                    </button>
+                  </form>
+                </div>
               </td>
             </tr>
             <% })) %>

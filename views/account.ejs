@@ -19,63 +19,90 @@
     <button type="button" class="btn btn-outline-primary btn-lg btn-block mx-2" id="completedButton">Completed</button>
   </div>
 
-  <div class="row" id="myGamesSection" style="display:none;">
-    <% for(i = 0; i < myGames.length; i++) { %>
-      <div class='col-lg-4 col-md-6 mt-4'>
-        <div class='shadow card mx-3 mt-3 px-0'>
-          <a href='/games/<%= myGames[i]._id %>'>
-            <img class='card-img-top' src='<%=myGames[i].image%>'>
-          </a>
-          <h3 class='m-2 card-title'> <%=myGames[i].title%> </h3>
-          <p class='mx-3 mb-3 card-text'> <%=myGames[i].description%> </p>
-        </div>
-      </div>
+  <div id="myGamesSection" style="display:none;">
+    <% if (myGames.length === 0) { %>
+      <h2 class="mx-3 mt-4">You havn't posted any games</h2>
+    <%} else { %>
+      <h2 class="mx-3 mt-4">My Games</h2>
     <% } %>
+    <div class="row">
+      <% for(i = 0; i < myGames.length; i++) { %>
+        <div class='col-lg-4 col-md-6 mt-1'>
+          <div class='shadow card mx-3 mt-3 px-0'>
+            <a href='/games/<%= myGames[i]._id %>'>
+              <img class='card-img-top' src='<%=myGames[i].image%>'>
+            </a>
+            <h3 class='m-2 card-title'> <%=myGames[i].title%> </h3>
+            <p class='mx-3 mb-3 card-text'> <%=myGames[i].description%> </p>
+          </div>
+        </div>
+      <% } %>
+    </div>
   </div>
 
-  <div class="row" id="wantSection" style="display:none;">
-    <% for(i = 0; i < wantGames.length; i++) { %>
-      <div class='col-lg-4 col-md-6 mt-4'>
-        <div class='shadow card mx-3 mt-3 px-0'>
-          <a href='/games/<%= wantGames[i]._id %>'>
-            <img class='card-img-top' src='<%=wantGames[i].image%>'>
-          </a>
-          <h3 class='m-2 card-title'> <%=wantGames[i].title%> </h3>
-          <p class='mx-3 mb-3 card-text'> <%=wantGames[i].description%> </p>
-        </div>
-      </div>
+  <div id="wantSection" style="display:none;">
+    <% if (wantGames.length === 0) { %>
+      <h2 class="mx-3 mt-4">You havn't added any games to your Want collection</h2>
+    <%} else { %>
+      <h2 class="mx-3 mt-4">Want</h2>
     <% } %>
+    <div class="row">
+      <% for(i = 0; i < wantGames.length; i++) { %>
+        <div class='col-lg-4 col-md-6 mt-1'>
+          <div class='shadow card mx-3 mt-3 px-0'>
+            <a href='/games/<%= wantGames[i]._id %>'>
+              <img class='card-img-top' src='<%=wantGames[i].image%>'>
+            </a>
+            <h3 class='m-2 card-title'> <%=wantGames[i].title%> </h3>
+            <p class='mx-3 mb-3 card-text'> <%=wantGames[i].description%> </p>
+          </div>
+        </div>
+      <% } %>
+    </div>
   </div>
 
 
-  <div class="row" id="playingSection" style="display:none;">
-    <% for(i = 0; i < playingGames.length; i++) { %>
-      <div class='col-lg-4 col-md-6 mt-4'>
-        <div class='shadow card mx-3 mt-3 px-0'>
-          <a href='/games/<%= playingGames[i]._id %>'>
-            <img class='card-img-top' src='<%=playingGames[i].image%>'>
-          </a>
-          <h3 class='m-2 card-title'> <%=playingGames[i].title%> </h3>
-          <p class='mx-3 mb-3 card-text'> <%=playingGames[i].description%> </p>
-        </div>
-      </div>
+  <div id="playingSection" style="display:none;">
+    <% if (playingGames.length === 0) { %>
+      <h2 class="mx-3 mt-4">You havn't added any games to your Playing collection</h2>
+    <%} else { %>
+      <h2 class="mx-3 mt-4">Playing</h2>
     <% } %>
+    <div class="row">
+      <% for(i = 0; i < playingGames.length; i++) { %>
+        <div class='col-lg-4 col-md-6 mt-1'>
+          <div class='shadow card mx-3 mt-3 px-0'>
+            <a href='/games/<%= playingGames[i]._id %>'>
+              <img class='card-img-top' src='<%=playingGames[i].image%>'>
+            </a>
+            <h3 class='m-2 card-title'> <%=playingGames[i].title%> </h3>
+            <p class='mx-3 mb-3 card-text'> <%=playingGames[i].description%> </p>
+          </div>
+        </div>
+      <% } %>
+    </div>
   </div>
 
-  <div class="row" id="completedSection" style="display:none;">
-    <% for(i = 0; i < completedGames.length; i++) { %>
-      <div class='col-lg-4 col-md-6 mt-4'>
-        <div class='shadow card mx-3 mt-3 px-0'>
-          <a href='/games/<%= completedGames[i]._id %>'>
-            <img class='card-img-top' src='<%=completedGames[i].image%>'>
-          </a>
-          <h3 class='m-2 card-title'> <%=completedGames[i].title%> </h3>
-          <p class='mx-3 mb-3 card-text'> <%=completedGames[i].description%> </p>
-        </div>
-      </div>
+  <div id="completedSection" style="display:none;">
+    <% if (completedGames.length === 0) { %>
+      <h2 class="mx-3 mt-4">You havn't added any games to your Completed collection</h2>
+    <%} else { %>
+      <h2 class="mx-3 mt-4">Completed</h2>
     <% } %>
+    <div class="row">
+      <% for(i = 0; i < completedGames.length; i++) { %>
+        <div class='col-lg-4 col-md-6 mt-1'>
+          <div class='shadow card mx-3 mt-3 px-0'>
+            <a href='/games/<%= completedGames[i]._id %>'>
+              <img class='card-img-top' src='<%=completedGames[i].image%>'>
+            </a>
+            <h3 class='m-2 card-title'> <%=completedGames[i].title%> </h3>
+            <p class='mx-3 mb-3 card-text'> <%=completedGames[i].description%> </p>
+          </div>
+        </div>
+      <% } %>
+    </div>
   </div>
-</div>
 
 <script>
   var user = <%- JSON.stringify(user) %>

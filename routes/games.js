@@ -10,7 +10,6 @@ const User = require("../models/user");
 
 //INDEX the games
 router.get("/games", async (req, res) => {
-  console.log(req.user);
   try {
     let games = await Game.find().exec();
     res.render("games", {games: games});
@@ -51,7 +50,7 @@ router.post("/games", isLoggedIn, async (req, res) => {
     req.flash("success", "Game created!");
     res.redirect("/games/" + game._id);
   } catch(err){
-    console.log("Error");
+    console.log(err);
     req.flash("error", "Failed to create game.");
     res.redirect("/games");
   }
@@ -98,7 +97,7 @@ router.get("/games/genre/:name", async (req, res) => {
 
 //Add game to your want, playing or completed collection
 router.post("/games/collection", isLoggedIn, async (req, res) => {
-  console.log("Request Body:", req.body);
+  // console.log("Request Body:", req.body);
   const game = await Game.findById(req.body.gameId);
   const checkWant = req.user.want.indexOf(game._id)
   const checkPlaying = req.user.playing.indexOf(game._id)
@@ -201,7 +200,7 @@ router.post("/games/collection", isLoggedIn, async (req, res) => {
 
 // Voting
 router.post("/games/vote", isLoggedIn, async (req, res) => {
-  console.log("Request Body:", req.body);
+  // console.log("Request Body:", req.body);
   const game = await Game.findById(req.body.gameId);
   const checkUpvote = game.upvotes.indexOf(req.user.username);
   const checkDownvote = game.downvotes.indexOf(req.user.username);
@@ -291,7 +290,7 @@ router.get("/games/:id" , async (req, res) =>{
     	console.error(err);
     });
   } catch(err){
-    console.log("Error");
+    console.log(err);
     res.send("Error");
   }
 });
@@ -322,7 +321,7 @@ router.put("/games/:id", checkGameOwner, async (req, res) => {
     esrb: req.body.esrb,
   }
   try {
-    console.log(updatedGame)
+    console.log("Updated Game:", updatedGame)
     let game = await Game.findByIdAndUpdate(req.params.id, updatedGame, {new: true}).exec();
     req.flash("success", "Game updated!");
     res.redirect(`/games/${req.params.id}`);

@@ -47,11 +47,30 @@ const handle_collection = (code) => {
     wantSection.style.display = 'none';
     playingSection.style.display = 'none';
     completedSection.style.display = 'none';
+
+    myGamesButton.classList.remove("btn-outline-primary");
+    myGamesButton.classList.add("btn-primary");
+    wantButton.classList.remove("btn-primary");
+    wantButton.classList.add("btn-outline-primary");
+    playingButton.classList.remove("btn-primary");
+    playingButton.classList.add("btn-outline-primary");
+    completedButton.classList.remove("btn-primary");
+    completedButton.classList.add("btn-outline-primary");
+
   } else if (code == 2){
     myGamesSection.style.display = 'none';
     wantSection.style.removeProperty('display');
     playingSection.style.display = 'none';
     completedSection.style.display = 'none';
+
+    myGamesButton.classList.remove("btn-primary");
+    myGamesButton.classList.add("btn-outline-primary");
+    wantButton.classList.add("btn-primary");
+    wantButton.classList.remove("btn-outline-primary");
+    playingButton.classList.remove("btn-primary");
+    playingButton.classList.add("btn-outline-primary");
+    completedButton.classList.remove("btn-primary");
+    completedButton.classList.add("btn-outline-primary");
 
   } else if (code == 3) {
     myGamesSection.style.display = 'none';
@@ -59,11 +78,29 @@ const handle_collection = (code) => {
     playingSection.style.removeProperty('display');
     completedSection.style.display = 'none';
 
+    myGamesButton.classList.remove("btn-primary");
+    myGamesButton.classList.add("btn-outline-primary");
+    wantButton.classList.remove("btn-primary");
+    wantButton.classList.add("btn-outline-primary");
+    playingButton.classList.add("btn-primary");
+    playingButton.classList.remove("btn-outline-primary");
+    completedButton.classList.remove("btn-primary");
+    completedButton.classList.add("btn-outline-primary");
+
   } else if (code == 4) {
     myGamesSection.style.display = 'none';
     wantSection.style.display = 'none';
     playingSection.style.display = 'none';
     completedSection.style.removeProperty('display');
+
+    myGamesButton.classList.remove("btn-primary");
+    myGamesButton.classList.add("btn-outline-primary");
+    wantButton.classList.remove("btn-primary");
+    wantButton.classList.add("btn-outline-primary");
+    playingButton.classList.remove("btn-primary");
+    playingButton.classList.add("btn-outline-primary");
+    completedButton.classList.add("btn-primary");
+    completedButton.classList.remove("btn-outline-primary");
 
   } else {
     console.log("Error inside account.js/handle_collection")
