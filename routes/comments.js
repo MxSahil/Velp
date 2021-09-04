@@ -3,7 +3,6 @@ const router = express.Router()
 const isLoggedIn = require('../utils/isLoggedIn');
 const checkCommentOwner = require('../utils/checkCommentOwner');
 
-
 const Comment = require('../models/comment');
 const Game = require('../models/game');
 
@@ -15,12 +14,13 @@ router.get("/games/:id/comments/new", isLoggedIn, (req, res) =>{
 //CREATE the comment
 router.post("/games/:id/comments", isLoggedIn, async (req, res) =>{
   try {
-
     let comment = await Comment.create({
       user: {id: req.user._id, username: req.user.username, avatar: req.user.avatar},
       text: req.body.text,
       gameID: req.body.gameID,
-      date: new Date()
+      date: new Date(),
+      likes: [req.user.username],
+      dislikes: []
     });
     req.flash("success", "Comment posted!");
     res.redirect(`/games/${req.body.gameID}`);
@@ -31,7 +31,7 @@ router.post("/games/:id/comments", isLoggedIn, async (req, res) =>{
   }
 });
 
-//form to EDIT a comment
+//Form to EDIT a comment
 router.get("/games/:id/comments/:commentid/edit", checkCommentOwner, async (req, res) => {
   try {
     let game = await Game.findById(req.params.id).exec();
@@ -45,7 +45,6 @@ router.get("/games/:id/comments/:commentid/edit", checkCommentOwner, async (req,
 
 //UPDATE the comment in the database
 router.put("/games/:id/comments/:commentid", checkCommentOwner, async (req, res) => {
-
     try {
       let comment = await Comment.findByIdAndUpdate(req.params.commentid, {text: req.body.text}, {new: true});
       req.flash("success", "Comment updated!");
@@ -70,13 +69,14 @@ router.delete("/games/:id/comments/:commentid", checkCommentOwner, async (req, r
   }
 });
 
+//Like or dislike a comment
 router.post("/games/:id/comments/:commentid/vote", isLoggedIn, async(req, res) => {
   const comment = await Comment.findById(req.body.commentID);
   const checkLike = comment.likes.indexOf(req.user.username);
   const checkDislike = comment.dislikes.indexOf(req.user.username);
 
   let response = {};
-  if (checkLike === -1 && checkDislike === -1) { //Not vote yet
+  if (checkLike === -1 && checkDislike === -1) { //No like or dislike yet
     if (req.body.vote === "like"){
       comment.likes.push(req.user.username);
       comment.save();
