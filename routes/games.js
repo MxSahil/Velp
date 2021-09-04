@@ -273,22 +273,23 @@ router.get("/games/:id" , async (req, res) =>{
     let game = await Game.findById(req.params.id).exec();
     let comments = await Comment.find({gameID: req.params.id});
     let title = game.title.replace(/ /g, "%20");
-    await fetch("https://amazon23.p.rapidapi.com/product-search?query="+title+"&country=CA", {
-    	"method": "GET",
-    	"headers": {
-    		"x-rapidapi-host": "amazon23.p.rapidapi.com",
-    		"x-rapidapi-key": "916efda5f5msh9551f04d54f6e98p14ed4fjsn9e70d61567a2"
-    	}
-    })
-    .then((response) => {
-    	return response.json()
-    })
-    .then((response) => {
-      res.render("games_show", {game: game, comments: comments, response: response});
-    })
-    .catch(err => {
-    	console.error(err);
-    });
+    res.render("games_show", {game: game, comments: comments, response: {result: []}});
+    // await fetch("https://amazon23.p.rapidapi.com/product-search?query="+title+"&country=CA", {
+    // 	"method": "GET",
+    // 	"headers": {
+    // 		"x-rapidapi-host": "amazon23.p.rapidapi.com",
+    // 		"x-rapidapi-key": "916efda5f5msh9551f04d54f6e98p14ed4fjsn9e70d61567a2"
+    // 	}
+    // })
+    // .then((response) => {
+    // 	return response.json()
+    // })
+    // .then((response) => {
+    //   res.render("games_show", {game: game, comments: comments, response: response});
+    // })
+    // .catch(err => {
+    // 	console.error(err);
+    // });
   } catch(err){
     console.log(err);
     res.send("Error");

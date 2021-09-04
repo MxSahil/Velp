@@ -2,6 +2,7 @@
 const upvote_button = document.getElementById("upvote_button");
 const downvote_button = document.getElementById("downvote_button");
 const score = document.getElementById("vote_score");
+
 const want_button = document.getElementById("want-icon");
 const playing_button = document.getElementById("playing-icon");
 const completed_button = document.getElementById("completed-icon");
@@ -9,8 +10,12 @@ const want_text = document.getElementById("want-text");
 const playing_text = document.getElementById("playing-text");
 const completed_text = document.getElementById("completed-text");
 
+// const like_button = document.getElementById("like_button");
+// const dislike_button = document.getElementById("dislike_button");
+// const like_counter = document.getElementById("like_counter");
+const likingButtons = document.getElementsByClassName("comment-liking-buttons");
 
-//Add event listeners
+
 const send_vote = async(vote_type) => {
   //build fetch options
   const options = {
@@ -43,7 +48,7 @@ const send_vote = async(vote_type) => {
 }
 
 const handle_vote = (newScore, code) => {
-  score.innerText = newScore;
+  score.innerText = newScore + " Upvotes";
   if (code === 0){
     upvote_button.classList.remove("btn-success");
     upvote_button.classList.add("btn-outline-success");
@@ -88,7 +93,7 @@ const send_collection = async (collection_type) => {
   }
 
   //send fetch request
-  await fetch("/games/collection", options)
+  await fetch("/games/vote", options)
   .then(data => {
     return data.json()
   })
@@ -100,6 +105,7 @@ const send_collection = async (collection_type) => {
     console.log(err);
   });
 }
+
 
 const handle_collection = (code) => {
   console.log(code);
@@ -168,9 +174,64 @@ const handle_collection = (code) => {
     completed_text.classList.add("game-experience-text")
   } else {
     console.log("Error inside handle_collection")
+  }
+}
 
+const send_like = async (like_type, commentID, comment) => {
+  //build fetch options
+  const options = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  if (like_type === 'like') {
+    options.body = JSON.stringify({vote: "like", commentID})
+  } else if (like_type === 'dislike'){
+    options.body = JSON.stringify({vote: "dislike", commentID})
+  } else {
+    throw "vote must be either like or dislike."
   }
 
+  await fetch("/games/"+gameId+"/comments/"+commentID+"/vote", options)
+  .then(data => {
+    return data.json()
+  })
+  .then(res => {
+    console.log(res);
+    handle_like(res.likes, res.code, comment)
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+
+const handle_like = (likes, code, comment) => {
+  comment.children[1].innerText = likes + " Likes";
+  const like_button = comment.children[0];
+  const dislike_button = comment.children[2];
+  if (code === 0){
+    like_button.classList.remove("btn-success");
+    like_button.classList.add("btn-outline-success");
+    dislike_button.classList.remove("btn-danger");
+    dislike_button.classList.add("btn-outline-danger");
+
+  } else if (code === -1) {
+    like_button.classList.remove("btn-success");
+    like_button.classList.add("btn-outline-success");
+    dislike_button.classList.remove("btn-outline-danger");
+    dislike_button.classList.add("btn-danger");
+
+  } else if (code === 1) {
+    like_button.classList.remove("btn-outline-success");
+    like_button.classList.add("btn-success");
+    dislike_button.classList.remove("btn-danger");
+    dislike_button.classList.add("btn-outline-danger");
+
+  } else {
+    console.log("Error inside handle_like")
+  }
 }
 
 upvote_button.addEventListener("click", async function() {
@@ -204,3 +265,27 @@ completed_button.addEventListener("click", async function() {
 completed_text.addEventListener("click", async function() {
   send_collection("completed")
 })
+
+// like_button.addEventListener("click", async function() {
+//   const commentID = like_button.className.split(/\s+/);
+//   send_like("like", commentID[0])
+// })
+//
+// dislike_button.addEventListener("click", async function() {
+//   const commentID = dislike_button.className.split(/\s+/);
+//   send_like("dislike", commentID[0])
+// })
+for (let c = 0; c < likingButtons.length; c++){
+  const commentID = likingButtons[c].children[3].getAttribute('commentID')
+  //Like button
+  likingButtons[c].children[0].addEventListener("click", async function() {
+    const commentID = likingButtons[c].children[0].className.split(/\s+/);
+    send_like("like", commentID[0], likingButtons[c])
+  })
+
+  //Dislike button
+  likingButtons[c].children[2].addEventListener("click", async function() {
+    const commentID = likingButtons[c].children[0].className.split(/\s+/);
+    send_like("dislike", commentID[0], likingButtons[c])
+  })
+}

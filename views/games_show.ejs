@@ -129,6 +129,7 @@
         <a href="/games/<%=game._id%>/comments/new" class="col-md-2" style="text-decoration : none;">
           <button type="button" class="btn btn-outline-primary btn-lg btn-block mb-3 mr-4">Add Comment</button>
         </a>
+
         <% if (user && game.upvotes.indexOf(user.username) >= 0) { %>
           <button type="button" id="upvote_button" class="btn btn-success btn-lg btn-block mb-3 mx-2">+</button>
         <% } else if (user) {%>
@@ -146,17 +147,6 @@
 
       <div class="col-md-12 mb-3 details-container">
         <table class="table table-striped">
-          <!-- <thead>
-            <tr>
-              <% if (comments.length === 0) { %>
-                <th scope="col" class="border-bottom-0 col-2">Be the first to comment on this game!</th>
-              <% } else {%>
-                <th scope="col" class="border-bottom-0 col-2">Username</th>
-                <th scope="col" class="border-bottom-0 col-2"></th>
-                <th scope="col" class="border-bottom-0 col-8">Comment</th>
-              <% } %>
-            </tr>
-          </thead> -->
           <tbody>
 
             <% comments.forEach((c => { %>
@@ -166,18 +156,6 @@
                   <img src=<%=c.user.avatar%> alt="user profile picture" height="50" width="50">
                 </div>
               </td>
-              <!--  <td>
-                <% if (user && user.username === c.user.username)  {%>
-                    <a class="btn btn-outline-success btn-sm btn-block mx-1 mb-1 w-75" href="/games/<%=game._id%>/comments/<%=c._id%>/edit">
-                      Edit
-                    </a>
-                    <form action="/games/<%=game._id%>/comments/<%=c._id%>?_method=DELETE" method="POST">
-                      <button type="submit" class="btn btn-outline-danger btn-sm btn-block mx-1 mb-1 w-75">
-                        Delete
-                      </button>
-                    </form>
-                <% } %>
-              </td> -->
               <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">
                 <div class="d-flex flex-row">
                   <p><%=c.user.username%></p>
@@ -185,20 +163,42 @@
                 </div>
                 <p><%=c.text%></p>
                 <div class="d-flex flex-row">
-                  <button type="submit" class="btn btn-outline-success btn-sm mb-1 mr-1 commentButton">
-                    <img src="https://static.thenounproject.com/png/12734-200.png" alt="Edit Comment" height="20" width="20">
-                  </button>
-                  <button type="submit" class="btn btn-outline-danger btn-sm mr-1 mb-1 commentButton">
-                    <img src="https://static.thenounproject.com/png/12734-200.png" alt="Edit Comment" height="20" width="20" style="transform:rotate(180deg)">
-                  </button>
-                  <a class="btn btn-outline-success btn-sm mb-1 mr-1 commentButton" href="/games/<%=game._id%>/comments/<%=c._id%>/edit">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/OOjs_UI_icon_edit-ltr.svg/1024px-OOjs_UI_icon_edit-ltr.svg.png" alt="Edit Comment" height="20" width="20">
-                  </a>
-                  <form action="/games/<%=game._id%>/comments/<%=c._id%>?_method=DELETE" method="POST">
-                    <button type="submit" class="btn btn-outline-danger btn-sm mr-1 mb-1 commentButton">
-                      <img src="https://icon-library.com/images/delete-icon-transparent-background/delete-icon-transparent-background-2.jpg" alt="Edit Comment" height="20" width="20">
-                    </button>
-                  </form>
+                  <div class="comment-liking-buttons">
+                    <% if (user && c.likes.indexOf(user.username) >= 0) { %>
+                      <button type="submit" class="<%=c._id%> btn btn-success btn-sm mb-1 mr-1 commentButton" id="like_button">
+                        <img src="https://static.thenounproject.com/png/12734-200.png" alt="Like Comment" height="20" width="20">
+                      </button>
+                    <% } else if (user) { %>
+                      <button type="submit" class="<%=c._id%> btn btn-outline-success btn-sm mb-1 mr-1 commentButton" id="like_button">
+                        <img src="https://static.thenounproject.com/png/12734-200.png" alt="Like Comment" height="20" width="20">
+                      </button>
+                    <% } %>
+                    <span id="like_counter" class="mx-1">
+                      <%= c.likes.length - c.dislikes.length %> Likes
+                    </span>
+                    <% if (user && c.dislikes.indexOf(user.username) >= 0) { %>
+                      <button type="submit" class="<%=c._id%> btn btn-danger btn-sm mr-1 mb-1 commentButton" id="dislike_button">
+                        <img src="https://static.thenounproject.com/png/12734-200.png" alt="Dislike Comment" height="20" width="20" style="transform:rotate(180deg)">
+                      </button>
+                    <% } else if (user) { %>
+                      <button type="submit" class="<%=c._id%> btn btn-outline-danger btn-sm mr-1 mb-1 commentButton" id="dislike_button">
+                        <img src="https://static.thenounproject.com/png/12734-200.png" alt="Dislike Comment" height="20" width="20" style="transform:rotate(180deg)">
+                      </button>
+                    <% } %>
+                    <script id="commentID">
+                      var commentID = "<%- c._id %>"
+                    </script>
+                  </div>
+                  <% if (user && user.username === c.user.username)  {%>
+                    <a class="btn btn-outline-success btn-sm mb-1 mr-1 commentButton" href="/games/<%=game._id%>/comments/<%=c._id%>/edit">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/OOjs_UI_icon_edit-ltr.svg/1024px-OOjs_UI_icon_edit-ltr.svg.png" alt="Edit Comment" height="20" width="20">
+                    </a>
+                    <form action="/games/<%=game._id%>/comments/<%=c._id%>?_method=DELETE" method="POST">
+                      <button type="submit" class="btn btn-outline-danger btn-sm mr-1 mb-1 commentButton">
+                        <img src="https://icon-library.com/images/delete-icon-transparent-background/delete-icon-transparent-background-2.jpg" alt="Edit Comment" height="20" width="20">
+                      </button>
+                    </form>
+                <% } %>
                 </div>
               </td>
             </tr>
@@ -209,8 +209,8 @@
       </div>
     </div>
 
-
-    <div class="col-md-6 mb-3">
+    <!-- Amazon links to purchase the game -->
+    <div class="col-md-6 mb-3" style="display:none">
       <div class="row">
         <div class="d-flex flex-row mx-1">
           <h3> Order From Amazon </h3>
@@ -230,9 +230,10 @@
               </div>
             </div>
           </div>
-          <% } %>
+        <% } %>
       </div>
     </div>
+
   </div>
 </div>
 
