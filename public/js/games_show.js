@@ -93,7 +93,7 @@ const send_collection = async (collection_type) => {
   }
 
   //send fetch request
-  await fetch("/games/vote", options)
+  await fetch("/games/collection", options)
   .then(data => {
     return data.json()
   })
