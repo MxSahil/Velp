@@ -102,3 +102,8 @@
   min-height: 150px;
   max-height: : 150px;
 }
+
+a, a:visited, a:hover, a:active{
+  text-decoration: none;
+  color:inherit;
+}

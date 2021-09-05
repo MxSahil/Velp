@@ -93,6 +93,13 @@
             <img class="mx-auto d-block game-experience-icons" id="want-icon" alt="Want" src="https://icons.iconarchive.com/icons/danieledesantis/christmas/512/gift-icon.png">
             <h4 class="game-experience-text" id="want-text">Want</h4>
           </div>
+        <% } else {%>
+          <div class="col-4 game-experience">
+            <a href="/not-logged-in">
+              <img class="mx-auto d-block game-experience-icons" id="want-icon" alt="Want" src="https://icons.iconarchive.com/icons/danieledesantis/christmas/512/gift-icon.png">
+              <h4 class="game-experience-text" id="want-text">Want</h4>
+            </a>
+          </div>
         <% } %>
 
         <% if (user && user.playing.indexOf(game._id) >= 0) {%>
@@ -105,6 +112,13 @@
             <img class="mx-auto d-block game-experience-icons" alt="Playing" id="playing-icon" src="https://static.thenounproject.com/png/2879647-200.png">
             <h4 class="game-experience-text" id="playing-text">Playing</h4>
           </div>
+        <% } else {%>
+          <div class="col-4 game-experience">
+            <a href="/not-logged-in">
+              <img class="mx-auto d-block game-experience-icons" alt="Playing" id="playing-icon" src="https://static.thenounproject.com/png/2879647-200.png">
+              <h4 class="game-experience-text" id="playing-text">Playing</h4>
+            </a>
+          </div>
         <% } %>
 
         <% if (user && user.completed.indexOf(game._id) >= 0) {%>
@@ -116,6 +130,13 @@
           <div class="col-4 game-experience">
             <img class="mx-auto d-block game-experience-icons" alt="Completed" id="completed-icon" src="https://static.thenounproject.com/png/463939-200.png">
             <h4 class="game-experience-text" id="completed-text">Completed</h4>
+          </div>
+        <% } else {%>
+          <div class="col-4 game-experience">
+            <a href="/not-logged-in">
+              <img class="mx-auto d-block game-experience-icons" alt="Completed" id="completed-icon" src="https://static.thenounproject.com/png/463939-200.png">
+              <h4 class="game-experience-text" id="completed-text">Completed</h4>
+            </a>
           </div>
         <% } %>
       </div>
@@ -133,7 +154,9 @@
         <% if (user && game.upvotes.indexOf(user.username) >= 0) { %>
           <button type="button" id="upvote_button" class="btn btn-success btn-lg btn-block mb-3 mx-2">+</button>
         <% } else if (user) {%>
-          <button type="button" id="upvote_button" class="btn btn-outline-success btn-lg btn-block mb-3 mx-2">+</button>
+          <button id="upvote_button" class="btn btn-outline-success btn-lg btn-block mb-3 mx-2">+</button>
+        <% } else { %>
+          <a class="btn btn-outline-success btn-lg btn-block mb-3 mx-2" href="/not-logged-in">+</a>
         <% } %>
         <span id="vote_score" class="mx-1">
           <%= game.upvotes.length - game.downvotes.length %> Upvotes
@@ -142,6 +165,8 @@
           <button type="button" id="downvote_button" class="btn btn-danger btn-lg btn-block mb-3 mx-2">-</button>
         <% } else if (user) {%>
           <button type="button" id="downvote_button" class="btn btn-outline-danger btn-lg btn-block mb-3 mx-2">-</button>
+        <% } else { %>
+          <a class="btn btn-outline-danger btn-lg btn-block mb-3 mx-2" href="/not-logged-in">-</a>
         <% } %>
       </div>
 
@@ -172,6 +197,10 @@
                       <button type="submit" class="<%=c._id%> btn btn-outline-success btn-sm mb-1 mr-1 commentButton" id="like_button">
                         <img src="https://static.thenounproject.com/png/12734-200.png" alt="Like Comment" height="20" width="20">
                       </button>
+                    <% } else {%>
+                      <a class="<%=c._id%> btn btn-outline-success btn-sm mb-1 mr-1 commentButton" id="like_button" href="/not-logged-in">
+                        <img src="https://static.thenounproject.com/png/12734-200.png" alt="Like Comment" height="20" width="20">
+                      </a>
                     <% } %>
                     <span id="like_counter" class="mx-1">
                       <%= c.likes.length - c.dislikes.length %> Likes
@@ -184,6 +213,10 @@
                       <button type="submit" class="<%=c._id%> btn btn-outline-danger btn-sm mr-1 mb-1 commentButton" id="dislike_button">
                         <img src="https://static.thenounproject.com/png/12734-200.png" alt="Dislike Comment" height="20" width="20" style="transform:rotate(180deg)">
                       </button>
+                    <% } else {%>
+                      <a class="<%=c._id%> btn btn-outline-danger btn-sm mr-1 mb-1 commentButton" id="dislike_button" href="/not-logged-in">
+                        <img src="https://static.thenounproject.com/png/12734-200.png" alt="Dislike Comment" height="20" width="20" style="transform:rotate(180deg)">
+                      </a>
                     <% } %>
                     <script id="commentID">
                       var commentID = "<%- c._id %>"

@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const passport = require('passport');
+const isLoggedIn = require('../utils/isLoggedIn');
+
 
 //Signup - form for new user
 router.get("/signup", (req, res) => {
   res.render("signup");
-})
+});
 
 //Sign up - Create new User
 router.post("/signup", async (req, res) => {
@@ -37,7 +39,7 @@ router.post("/signup", async (req, res) => {
     req.flash("error", "Could not sign you up.");
     res.redirect("/games");
   }
-})
+});
 
 //Log in - form for logging in
 router.get("/login", (req, res) => {
@@ -52,13 +54,15 @@ router.post("/login", passport.authenticate('local', {
   failureFlash: "Failed to log in. Please ensure your username and password are correct"
 }));
 
-
 //Logout the user
 router.get("/logout", (req, res) => {
   req.logout();
   req.flash("success", "Successfully logged out");
   res.redirect("/games")
-})
+});
+
+//Unauthenticated users clicking buttons such as upvote, or like comment are sent here
+router.get("/not-logged-in", isLoggedIn);
 
 
 module.exports = router;
