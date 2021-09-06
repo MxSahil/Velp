@@ -10,9 +10,6 @@ const want_text = document.getElementById("want-text");
 const playing_text = document.getElementById("playing-text");
 const completed_text = document.getElementById("completed-text");
 
-// const like_button = document.getElementById("like_button");
-// const dislike_button = document.getElementById("dislike_button");
-// const like_counter = document.getElementById("like_counter");
 const likingButtons = document.getElementsByClassName("comment-liking-buttons");
 
 
@@ -266,26 +263,15 @@ completed_text.addEventListener("click", async function() {
   send_collection("completed")
 })
 
-// like_button.addEventListener("click", async function() {
-//   const commentID = like_button.className.split(/\s+/);
-//   send_like("like", commentID[0])
-// })
-//
-// dislike_button.addEventListener("click", async function() {
-//   const commentID = dislike_button.className.split(/\s+/);
-//   send_like("dislike", commentID[0])
-// })
 for (let c = 0; c < likingButtons.length; c++){
-  const commentID = likingButtons[c].children[3].getAttribute('commentID')
+  const commentID = commentIDs[c];
   //Like button
   likingButtons[c].children[0].addEventListener("click", async function() {
-    const commentID = likingButtons[c].children[0].className.split(/\s+/);
-    send_like("like", commentID[0], likingButtons[c])
+    send_like("like", commentID, likingButtons[c])
   })
 
   //Dislike button
   likingButtons[c].children[2].addEventListener("click", async function() {
-    const commentID = likingButtons[c].children[0].className.split(/\s+/);
-    send_like("dislike", commentID[0], likingButtons[c])
+    send_like("dislike", commentID, likingButtons[c])
   })
 }
