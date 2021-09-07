@@ -21,30 +21,42 @@
       <div class="col">
         <label for="platforms">Platforms</label>
         <select class="custom-select" multiple name="platforms" size="5">
-          <option >PC</option>
-          <option >Playstation 5</option>
-          <option >Xbox Series X</option>
-          <option >Playstation 4</option>
-          <option >Xbox One</option>
-          <option >Playstation 3</option>
-          <option >Xbox 360</option>
+          <% if (platforms) { %>
+            <% for(let i = 0; i < platforms.length; i++) { %>
+              <option ><%=platforms[i].name%></option>
+            <% } %>
+          <% } else { %>
+            <option >PC</option>
+            <option >Playstation 5</option>
+            <option >Xbox Series X</option>
+            <option >Playstation 4</option>
+            <option >Xbox One</option>
+            <option >Playstation 3</option>
+            <option >Xbox 360</option>
+          <% } %>
         </select>
       </div>
 
       <div class="col">
         <label for="genres">Genres</label>
         <select class="custom-select" multiple name="genres" size="5">
-          <option >Action</option>
-          <option >Adventure</option>
-          <option >RPG</option>
-          <option >Fighting</option>
-          <option >Strategy</option>
-          <option >Shooter</option>
-          <option >Sport</option>
-          <option >Racing</option>
-          <option >Casual</option>
-          <option >Simulation</option>
-          <option >Arcade</option>
+          <% if (genres) { %>
+            <% for(let i = 0; i < genres.length; i++) { %>
+              <option ><%=genres[i].name%></option>
+            <% } %>
+          <% } else { %>
+            <option >Action</option>
+            <option >Adventure</option>
+            <option >RPG</option>
+            <option >Fighting</option>
+            <option >Strategy</option>
+            <option >Shooter</option>
+            <option >Sport</option>
+            <option >Racing</option>
+            <option >Casual</option>
+            <option >Simulation</option>
+            <option >Arcade</option>
+          <% } %>
         </select>
       </div>
     </div>
@@ -53,30 +65,42 @@
       <div class="col">
         <label for="developers">Developers</label>
         <select class="custom-select" multiple name="developers" size="5">
-          <option >Treyarch</option>
-          <option >343 Industries</option>
-          <option >Bungie</option>
-          <option >2K Sports</option>
-          <option >Epic Games</option>
-          <option >Electronic Arts</option>
-          <option >Infinity Ward</option>
+          <% if (companies) { %>
+            <% for(let i = 0; i < companies.length; i++) { %>
+              <option ><%=companies[i].name%></option>
+            <% } %>
+          <% } else { %>
+            <option >Treyarch</option>
+            <option >343 Industries</option>
+            <option >Bungie</option>
+            <option >2K Sports</option>
+            <option >Epic Games</option>
+            <option >Electronic Arts</option>
+            <option >Infinity Ward</option>
+          <% } %>
         </select>
       </div>
 
       <div class="col">
         <label for="publishers">Publishers</label>
         <select class="custom-select" multiple name="publishers" size="5">
-          <option >Activision Blizzard</option>
-          <option >Microsoft</option>
-          <option >Sony</option>
-          <option >EA</option>
-          <option >Google</option>
-          <option >Nintendo</option>
-          <option >Sega</option>
-          <option >Tell-Tale Games</option>
-          <option >Valve Corporation</option>
-          <option >Ubisoft</option>
-          <option >Bethesda Softworks</option>
+          <% if (companies) { %>
+            <% for(let i = 0; i < companies.length; i++) { %>
+              <option ><%=companies[i].name%></option>
+            <% } %>
+          <% } else { %>
+            <option >Activision Blizzard</option>
+            <option >Microsoft</option>
+            <option >Sony</option>
+            <option >EA</option>
+            <option >Google</option>
+            <option >Nintendo</option>
+            <option >Sega</option>
+            <option >Tell-Tale Games</option>
+            <option >Valve Corporation</option>
+            <option >Ubisoft</option>
+            <option >Bethesda Softworks</option>
+          <% } %>
         </select>
       </div>
     </div>

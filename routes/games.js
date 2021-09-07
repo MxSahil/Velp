@@ -3,6 +3,12 @@ const router = express.Router();
 const isLoggedIn = require('../utils/isLoggedIn');
 const checkGameOwner = require('../utils/checkGameOwner');
 const fetch = require('node-fetch');
+try {
+  var config = require("../config");
+} catch(err){
+  console.log("Could not import config file.");
+  console.log(err);
+}
 
 const Game = require('../models/game');
 const Comment = require('../models/comment');
@@ -20,8 +26,98 @@ router.get("/games", async (req, res) => {
 });
 
 //Form to add NEW game
-router.get("/games/new", isLoggedIn, (req, res) => {
-  res.render("games_new");
+router.get("/games/new", isLoggedIn, async (req, res) => {
+  //IGDB Authentication
+  const id = process.env.IGDB_ID || config.igdb.id;
+  const secret = process.env.IGDB_SECRET || config.igdb.secret;
+  const url = "https://id.twitch.tv/oauth2/token?client_id="+id+"&client_secret="+secret+"&grant_type=client_credentials";
+  const options = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  let access_token;
+  await fetch(url, options)
+  .then(data => {
+    return data.json()
+  })
+  .then(response => {
+    access_token = response.access_token;
+    console.log(access_token);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+
+  //Retrieve data
+  let platforms;
+  let genres;
+  let companies;
+  await fetch("https://api.igdb.com/v4/platforms", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      "Client-ID": id,
+      "Authorization": "Bearer " + access_token,
+    },
+    body: "fields name; limit 500; sort name;"
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .then((response) => {
+    platforms = response;
+    console.log(platforms);
+  })
+  .catch((err) => {
+    console.log(err);
+    platforms = null;
+  })
+
+  await fetch("https://api.igdb.com/v4/genres", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      "Client-ID": id,
+      "Authorization": "Bearer " + access_token,
+    },
+    body: "fields name; limit 500; sort name;"
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .then((response) => {
+    genres = response;
+    console.log(genres);
+  })
+  .catch((err) => {
+    console.log(err);
+    genres = null;
+  })
+
+  await fetch("https://api.igdb.com/v4/companies", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      "Client-ID": id,
+      "Authorization": "Bearer " + access_token,
+    },
+    body: "fields created_at,developed,name,published,start_date; limit 500; sort name;"
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .then((response) => {
+    companies = response;
+    console.log(companies);
+  })
+  .catch((err) => {
+    console.log(err);
+    companies = null;
+  })
+  res.render("games_new", {platforms, genres, companies: null});
 });
 
 //CREATE a new game in the database
@@ -278,7 +374,7 @@ router.get("/games/:id" , async (req, res) =>{
     	"method": "GET",
     	"headers": {
     		"x-rapidapi-host": "amazon23.p.rapidapi.com",
-    		"x-rapidapi-key": "916efda5f5msh9551f04d54f6e98p14ed4fjsn9e70d61567a2"
+    		"x-rapidapi-key": process.env.AMAZON_API_KEY || config.amazon.api_key
     	}
     })
     .then((response) => {
